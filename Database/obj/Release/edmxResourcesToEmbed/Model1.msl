@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="goldelec_screenAdsModelStoreContainer" CdmEntityContainer="goldelec_screenAdsEntities">
+    <EntitySetMapping Name="Gradovi">
+      <EntityTypeMapping TypeName="goldelec_screenAdsModel.Gradovi">
+        <MappingFragment StoreEntitySet="Gradovi">
+          <ScalarProperty Name="GradID" ColumnName="GradID" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Klijenti">
+      <EntityTypeMapping TypeName="goldelec_screenAdsModel.Klijenti">
+        <MappingFragment StoreEntitySet="Klijenti">
+          <ScalarProperty Name="KlijentID" ColumnName="KlijentID" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="KontaktTelefon" ColumnName="KontaktTelefon" />
+          <ScalarProperty Name="KontaktOsoba" ColumnName="KontaktOsoba" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Marketing">
+      <EntityTypeMapping TypeName="goldelec_screenAdsModel.Marketing">
+        <MappingFragment StoreEntitySet="Marketing">
+          <ScalarProperty Name="MarketingID" ColumnName="MarketingID" />
+          <ScalarProperty Name="PaketID" ColumnName="PaketID" />
+          <ScalarProperty Name="ReklamaID" ColumnName="ReklamaID" />
+          <ScalarProperty Name="DatumOd" ColumnName="DatumOd" />
+          <ScalarProperty Name="DatumDo" ColumnName="DatumDo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Objekti">
+      <EntityTypeMapping TypeName="goldelec_screenAdsModel.Objekti">
+        <MappingFragment StoreEntitySet="Objekti">
+          <ScalarProperty Name="ObjekatID" ColumnName="ObjekatID" />
+          <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="TipId" ColumnName="TipId" />
+          <ScalarProperty Name="KontaktTelefon" ColumnName="KontaktTelefon" />
+          <ScalarProperty Name="KontaktOsoba" ColumnName="KontaktOsoba" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Paketi">
+      <EntityTypeMapping TypeName="goldelec_screenAdsModel.Paketi">
+        <MappingFragment StoreEntitySet="Paketi">
+          <ScalarProperty Name="PaketID" ColumnName="PaketID" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaketiTelevizije">
+      <EntityTypeMapping TypeName="goldelec_screenAdsModel.PaketiTelevizije">
+        <MappingFragment StoreEntitySet="PaketiTelevizije">
+          <ScalarProperty Name="PaketiTelevizijeID" ColumnName="PaketiTelevizijeID" />
+          <ScalarProperty Name="PaketID" ColumnName="PaketID" />
+          <ScalarProperty Name="TelevizijaID" ColumnName="TelevizijaID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaketiTermini">
+      <EntityTypeMapping TypeName="goldelec_screenAdsModel.PaketiTermini">
+        <MappingFragment StoreEntitySet="PaketiTermini">
+          <ScalarProperty Name="PaketiTerminiID" ColumnName="PaketiTerminiID" />
+          <ScalarProperty Name="PaketID" ColumnName="PaketID" />
+          <ScalarProperty Name="Termin" ColumnName="Termin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reklama">
+      <EntityTypeMapping TypeName="goldelec_screenAdsModel.Reklama">
+        <MappingFragment StoreEntitySet="Reklama">
+          <ScalarProperty Name="ReklamaID" ColumnName="ReklamaID" />
+          <ScalarProperty Name="Video" ColumnName="Video" />
+          <ScalarProperty Name="KlijentID" ColumnName="KlijentID" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="DuzinaReklame" ColumnName="DuzinaReklame" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Televizije">
+      <EntityTypeMapping TypeName="goldelec_screenAdsModel.Televizije">
+        <MappingFragment StoreEntitySet="Televizije">
+          <ScalarProperty Name="TelevizijaID" ColumnName="TelevizijaID" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="GradID" ColumnName="GradID" />
+          <ScalarProperty Name="ObjekatId" ColumnName="ObjekatId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipObjekta">
+      <EntityTypeMapping TypeName="goldelec_screenAdsModel.TipObjekta">
+        <MappingFragment StoreEntitySet="TipObjekta">
+          <ScalarProperty Name="TipObjektaID" ColumnName="TipObjektaID" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="BrisiGrad" FunctionName="goldelec_screenAdsModel.Store.BrisiGrad" />
+    <FunctionImportMapping FunctionImportName="BrisiKlijent" FunctionName="goldelec_screenAdsModel.Store.BrisiKlijent" />
+    <FunctionImportMapping FunctionImportName="BrisiMarketing" FunctionName="goldelec_screenAdsModel.Store.BrisiMarketing" />
+    <FunctionImportMapping FunctionImportName="BrisiObjekat" FunctionName="goldelec_screenAdsModel.Store.BrisiObjekat" />
+    <FunctionImportMapping FunctionImportName="BrisiPaket" FunctionName="goldelec_screenAdsModel.Store.BrisiPaket" />
+    <FunctionImportMapping FunctionImportName="BrisiPaketFromPaketiTelevizije" FunctionName="goldelec_screenAdsModel.Store.BrisiPaketFromPaketiTelevizije" />
+    <FunctionImportMapping FunctionImportName="BrisiPaketiTermini" FunctionName="goldelec_screenAdsModel.Store.BrisiPaketiTermini" />
+    <FunctionImportMapping FunctionImportName="BrisiPaketTelevizija" FunctionName="goldelec_screenAdsModel.Store.BrisiPaketTelevizija" />
+    <FunctionImportMapping FunctionImportName="BrisiReklamu" FunctionName="goldelec_screenAdsModel.Store.BrisiReklamu" />
+    <FunctionImportMapping FunctionImportName="BrisiTeleviziju" FunctionName="goldelec_screenAdsModel.Store.BrisiTeleviziju" />
+    <FunctionImportMapping FunctionImportName="BrisiTipObjekta" FunctionName="goldelec_screenAdsModel.Store.BrisiTipObjekta" />
+    <FunctionImportMapping FunctionImportName="DodajDane" FunctionName="goldelec_screenAdsModel.Store.DodajDane" />
+    <FunctionImportMapping FunctionImportName="DodajGrad" FunctionName="goldelec_screenAdsModel.Store.DodajGrad" />
+    <FunctionImportMapping FunctionImportName="DodajKlijent" FunctionName="goldelec_screenAdsModel.Store.DodajKlijent" />
+    <FunctionImportMapping FunctionImportName="DodajMarketing" FunctionName="goldelec_screenAdsModel.Store.DodajMarketing" />
+    <FunctionImportMapping FunctionImportName="DodajObjekat" FunctionName="goldelec_screenAdsModel.Store.DodajObjekat" />
+    <FunctionImportMapping FunctionImportName="DodajPaket" FunctionName="goldelec_screenAdsModel.Store.DodajPaket" />
+    <FunctionImportMapping FunctionImportName="DodajPaketiTelevizije" FunctionName="goldelec_screenAdsModel.Store.DodajPaketiTelevizije" />
+    <FunctionImportMapping FunctionImportName="DodajPaketiTermini" FunctionName="goldelec_screenAdsModel.Store.DodajPaketiTermini" />
+    <FunctionImportMapping FunctionImportName="DodajReklamu" FunctionName="goldelec_screenAdsModel.Store.DodajReklamu" />
+    <FunctionImportMapping FunctionImportName="DodajTeleviziju" FunctionName="goldelec_screenAdsModel.Store.DodajTeleviziju" />
+    <FunctionImportMapping FunctionImportName="DodajTipObjekta" FunctionName="goldelec_screenAdsModel.Store.DodajTipObjekta" />
+    <FunctionImportMapping FunctionImportName="Info" FunctionName="goldelec_screenAdsModel.Store.Info">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="goldelec_screenAdsModel.Info_Result">
+          <ScalarProperty Name="MarketingID" ColumnName="MarketingID" />
+          <ScalarProperty Name="NazivReklame" ColumnName="NazivReklame" />
+          <ScalarProperty Name="Video" ColumnName="Video" />
+          <ScalarProperty Name="NazivPaketa" ColumnName="NazivPaketa" />
+          <ScalarProperty Name="Termin" ColumnName="Termin" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="IzmjeniObjekat" FunctionName="goldelec_screenAdsModel.Store.IzmjeniObjekat" />
+    <FunctionImportMapping FunctionImportName="IzmjeniReklamu" FunctionName="goldelec_screenAdsModel.Store.IzmjeniReklamu" />
+    <FunctionImportMapping FunctionImportName="IzmjeniTeleviziju" FunctionName="goldelec_screenAdsModel.Store.IzmjeniTeleviziju" />
+    <FunctionImportMapping FunctionImportName="KlijentByID" FunctionName="goldelec_screenAdsModel.Store.KlijentByID" />
+    <FunctionImportMapping FunctionImportName="MarketingByReklama" FunctionName="goldelec_screenAdsModel.Store.MarketingByReklama">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="goldelec_screenAdsModel.MarketingByReklama_Result">
+          <ScalarProperty Name="MarketingID" ColumnName="MarketingID" />
+          <ScalarProperty Name="DatumOd" ColumnName="DatumOd" />
+          <ScalarProperty Name="DatumDo" ColumnName="DatumDo" />
+          <ScalarProperty Name="Paket" ColumnName="Paket" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="MarketingKlijentPrikaz" FunctionName="goldelec_screenAdsModel.Store.MarketingKlijentPrikaz">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="goldelec_screenAdsModel.MarketingKlijentPrikaz_Result">
+          <ScalarProperty Name="MarketingID" ColumnName="MarketingID" />
+          <ScalarProperty Name="NazivPaketa" ColumnName="NazivPaketa" />
+          <ScalarProperty Name="NazivVidea" ColumnName="NazivVidea" />
+          <ScalarProperty Name="NazivKlijenta" ColumnName="NazivKlijenta" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="MarketingProvjera" FunctionName="goldelec_screenAdsModel.Store.MarketingProvjera">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="goldelec_screenAdsModel.MarketingProvjera_Result">
+          <ScalarProperty Name="MarketingID" ColumnName="MarketingID" />
+          <ScalarProperty Name="PaketID" ColumnName="PaketID" />
+          <ScalarProperty Name="ReklamaID" ColumnName="ReklamaID" />
+          <ScalarProperty Name="DatumOd" ColumnName="DatumOd" />
+          <ScalarProperty Name="DatumDo" ColumnName="DatumDo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ObjekatByID" FunctionName="goldelec_screenAdsModel.Store.ObjekatByID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="goldelec_screenAdsModel.ObjekatByID_Result">
+          <ScalarProperty Name="ObjekatID" ColumnName="ObjekatID" />
+          <ScalarProperty Name="NazivObjekta" ColumnName="NazivObjekta" />
+          <ScalarProperty Name="AdresaObjekta" ColumnName="AdresaObjekta" />
+          <ScalarProperty Name="TipObjekta" ColumnName="TipObjekta" />
+          <ScalarProperty Name="KontaktOsoba" ColumnName="KontaktOsoba" />
+          <ScalarProperty Name="KontaktTelefon" ColumnName="KontaktTelefon" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ObjekatByNaziv" FunctionName="goldelec_screenAdsModel.Store.ObjekatByNaziv">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="goldelec_screenAdsModel.ObjekatByNaziv_Result">
+          <ScalarProperty Name="ObjekatID" ColumnName="ObjekatID" />
+          <ScalarProperty Name="NazivObjekta" ColumnName="NazivObjekta" />
+          <ScalarProperty Name="AdresaObjekta" ColumnName="AdresaObjekta" />
+          <ScalarProperty Name="TipObjekta" ColumnName="TipObjekta" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ObjektiSaTipovima" FunctionName="goldelec_screenAdsModel.Store.ObjektiSaTipovima">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="goldelec_screenAdsModel.ObjektiSaTipovima_Result">
+          <ScalarProperty Name="ObjekatID" ColumnName="ObjekatID" />
+          <ScalarProperty Name="KontaktOsoba" ColumnName="KontaktOsoba" />
+          <ScalarProperty Name="KontaktTelefon" ColumnName="KontaktTelefon" />
+          <ScalarProperty Name="NazivObjekta" ColumnName="NazivObjekta" />
+          <ScalarProperty Name="AdresaObjekta" ColumnName="AdresaObjekta" />
+          <ScalarProperty Name="TipObjekta" ColumnName="TipObjekta" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ObrisiTvByObjekat" FunctionName="goldelec_screenAdsModel.Store.ObrisiTvByObjekat" />
+    <FunctionImportMapping FunctionImportName="ObrišiTvFromPaketiTelevizije" FunctionName="goldelec_screenAdsModel.Store.ObrišiTvFromPaketiTelevizije" />
+    <FunctionImportMapping FunctionImportName="PaketByName" FunctionName="goldelec_screenAdsModel.Store.PaketByName" />
+    <FunctionImportMapping FunctionImportName="PaketInfo" FunctionName="goldelec_screenAdsModel.Store.PaketInfo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="goldelec_screenAdsModel.PaketInfo_Result">
+          <ScalarProperty Name="NazivTelevizije" ColumnName="NazivTelevizije" />
+          <ScalarProperty Name="NazivGrada" ColumnName="NazivGrada" />
+          <ScalarProperty Name="NazivObjekta" ColumnName="NazivObjekta" />
+          <ScalarProperty Name="AdresaObjekta" ColumnName="AdresaObjekta" />
+          <ScalarProperty Name="TipObjektaNaziv" ColumnName="TipObjektaNaziv" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="PaketiTelevizijeByPaketIDTelevizijaID" FunctionName="goldelec_screenAdsModel.Store.PaketiTelevizijeByPaketIDTelevizijaID" />
+    <FunctionImportMapping FunctionImportName="PaketiTerminiProvjera" FunctionName="goldelec_screenAdsModel.Store.PaketiTerminiProvjera" />
+    <FunctionImportMapping FunctionImportName="ProvjeraSlobodnihDana" FunctionName="goldelec_screenAdsModel.Store.ProvjeraSlobodnihDana">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="goldelec_screenAdsModel.ProvjeraSlobodnihDana_Result">
+          <ScalarProperty Name="MarketingID" ColumnName="MarketingID" />
+          <ScalarProperty Name="PaketID" ColumnName="PaketID" />
+          <ScalarProperty Name="NazivReklame" ColumnName="NazivReklame" />
+          <ScalarProperty Name="DuzinaReklame" ColumnName="DuzinaReklame" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ReklamaByID" FunctionName="goldelec_screenAdsModel.Store.ReklamaByID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="goldelec_screenAdsModel.ReklamaByID_Result">
+          <ScalarProperty Name="ReklamaID" ColumnName="ReklamaID" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="Video" ColumnName="Video" />
+          <ScalarProperty Name="Klijent" ColumnName="Klijent" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ReklamaByNaziv" FunctionName="goldelec_screenAdsModel.Store.ReklamaByNaziv" />
+    <FunctionImportMapping FunctionImportName="ReklameByKlijent" FunctionName="goldelec_screenAdsModel.Store.ReklameByKlijent" />
+    <FunctionImportMapping FunctionImportName="SveReklame" FunctionName="goldelec_screenAdsModel.Store.SveReklame">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="goldelec_screenAdsModel.SveReklame_Result">
+          <ScalarProperty Name="ReklamaID" ColumnName="ReklamaID" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="Video" ColumnName="Video" />
+          <ScalarProperty Name="DuzinaReklame" ColumnName="DuzinaReklame" />
+          <ScalarProperty Name="Klijent" ColumnName="Klijent" />
+          <ScalarProperty Name="KontaktTelefon" ColumnName="KontaktTelefon" />
+          <ScalarProperty Name="KontaktOsoba" ColumnName="KontaktOsoba" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SveTelevizije" FunctionName="goldelec_screenAdsModel.Store.SveTelevizije">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="goldelec_screenAdsModel.SveTelevizije_Result">
+          <ScalarProperty Name="TelevizijaID" ColumnName="TelevizijaID" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="GradID" ColumnName="GradID" />
+          <ScalarProperty Name="ObjekatId" ColumnName="ObjekatId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SviGradovi" FunctionName="goldelec_screenAdsModel.Store.SviGradovi" />
+    <FunctionImportMapping FunctionImportName="SviKlijenti" FunctionName="goldelec_screenAdsModel.Store.SviKlijenti" />
+    <FunctionImportMapping FunctionImportName="SviObjekti" FunctionName="goldelec_screenAdsModel.Store.SviObjekti" />
+    <FunctionImportMapping FunctionImportName="SviPaketi" FunctionName="goldelec_screenAdsModel.Store.SviPaketi">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="goldelec_screenAdsModel.SviPaketi_Result">
+          <ScalarProperty Name="PaketID" ColumnName="PaketID" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SviTipoviObjekta" FunctionName="goldelec_screenAdsModel.Store.SviTipoviObjekta" />
+    <FunctionImportMapping FunctionImportName="TelevizijaByID" FunctionName="goldelec_screenAdsModel.Store.TelevizijaByID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="goldelec_screenAdsModel.TelevizijaByID_Result">
+          <ScalarProperty Name="TelevizijaID" ColumnName="TelevizijaID" />
+          <ScalarProperty Name="NazivTelevizije" ColumnName="NazivTelevizije" />
+          <ScalarProperty Name="NazivGrada" ColumnName="NazivGrada" />
+          <ScalarProperty Name="NazivObjekta" ColumnName="NazivObjekta" />
+          <ScalarProperty Name="AdresaObjekta" ColumnName="AdresaObjekta" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="TelevizijaByName" FunctionName="goldelec_screenAdsModel.Store.TelevizijaByName">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="goldelec_screenAdsModel.TelevizijaByName_Result">
+          <ScalarProperty Name="TelevizijaID" ColumnName="TelevizijaID" />
+          <ScalarProperty Name="NazivTelevizije" ColumnName="NazivTelevizije" />
+          <ScalarProperty Name="NazivGrada" ColumnName="NazivGrada" />
+          <ScalarProperty Name="NazivObjekta" ColumnName="NazivObjekta" />
+          <ScalarProperty Name="AdresaObjekta" ColumnName="AdresaObjekta" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="TelevizijeByPaket" FunctionName="goldelec_screenAdsModel.Store.TelevizijeByPaket">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="goldelec_screenAdsModel.TelevizijeByPaket_Result">
+          <ScalarProperty Name="PaketiTelevizijeID" ColumnName="PaketiTelevizijeID" />
+          <ScalarProperty Name="NazivTelevizije" ColumnName="NazivTelevizije" />
+          <ScalarProperty Name="NazivGrada" ColumnName="NazivGrada" />
+          <ScalarProperty Name="NazivObjekta" ColumnName="NazivObjekta" />
+          <ScalarProperty Name="AdresaObjekta" ColumnName="AdresaObjekta" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="TelevizijeInfo" FunctionName="goldelec_screenAdsModel.Store.TelevizijeInfo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="goldelec_screenAdsModel.TelevizijeInfo_Result">
+          <ScalarProperty Name="TelevizijaID" ColumnName="TelevizijaID" />
+          <ScalarProperty Name="NazivTelevizije" ColumnName="NazivTelevizije" />
+          <ScalarProperty Name="NazivGrada" ColumnName="NazivGrada" />
+          <ScalarProperty Name="NazivObjekta" ColumnName="NazivObjekta" />
+          <ScalarProperty Name="AdresaObjekta" ColumnName="AdresaObjekta" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="TerminiByPaket" FunctionName="goldelec_screenAdsModel.Store.TerminiByPaket">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="goldelec_screenAdsModel.TerminiByPaket_Result">
+          <ScalarProperty Name="PaketiTerminiID" ColumnName="PaketiTerminiID" />
+          <ScalarProperty Name="PaketID" ColumnName="PaketID" />
+          <ScalarProperty Name="Termin" ColumnName="Termin" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="TipOBjektaByName" FunctionName="goldelec_screenAdsModel.Store.TipOBjektaByName" />
+    <EntitySetMapping Name="CheckUpdateAndroid">
+      <EntityTypeMapping TypeName="goldelec_screenAdsModel.CheckUpdateAndroid">
+        <MappingFragment StoreEntitySet="CheckUpdateAndroid">
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="UpdateAndroidDodaj" FunctionName="goldelec_screenAdsModel.Store.UpdateAndroidDodaj" />
+    <FunctionImportMapping FunctionImportName="UPDATEANDROIDTRENUTNISTATUS" FunctionName="goldelec_screenAdsModel.Store.UPDATEANDROIDTRENUTNISTATUS" />
+    <FunctionImportMapping FunctionImportName="MarketingPoDatumu" FunctionName="goldelec_screenAdsModel.Store.MarketingPoDatumu">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="goldelec_screenAdsModel.MarketingPoDatumu_Result">
+          <ScalarProperty Name="PaketID" ColumnName="PaketID" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ReklameByPaketIDatum" FunctionName="goldelec_screenAdsModel.Store.ReklameByPaketIDatum">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="goldelec_screenAdsModel.ReklameByPaketIDatum_Result">
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="Video" ColumnName="Video" />
+          <ScalarProperty Name="DuzinaReklame" ColumnName="DuzinaReklame" />
+          <ScalarProperty Name="NazivKlijenta" ColumnName="NazivKlijenta" />
+          <ScalarProperty Name="KontaktTelefon" ColumnName="KontaktTelefon" />
+          <ScalarProperty Name="KontaktOsoba" ColumnName="KontaktOsoba" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="DeleteError" FunctionName="goldelec_screenAdsModel.Store.DeleteError" />
+    <FunctionImportMapping FunctionImportName="InsertError" FunctionName="goldelec_screenAdsModel.Store.InsertError" />
+    <FunctionImportMapping FunctionImportName="SelectError" FunctionName="goldelec_screenAdsModel.Store.SelectError">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="goldelec_screenAdsModel.SelectError_Result">
+          <ScalarProperty Name="ErrorID" ColumnName="ErrorID" />
+          <ScalarProperty Name="nazivTV" ColumnName="nazivTV" />
+          <ScalarProperty Name="Vrijeme" ColumnName="Vrijeme" />
+          <ScalarProperty Name="TipErrora" ColumnName="TipErrora" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

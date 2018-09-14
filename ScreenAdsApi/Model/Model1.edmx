@@ -1,0 +1,1697 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="goldelec_screenAdsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Gradovi">
+          <Key>
+            <PropertyRef Name="GradID" />
+          </Key>
+          <Property Name="GradID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Klijenti">
+          <Key>
+            <PropertyRef Name="KlijentID" />
+          </Key>
+          <Property Name="KlijentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="KontaktTelefon" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="KontaktOsoba" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Marketing">
+          <Key>
+            <PropertyRef Name="MarketingID" />
+          </Key>
+          <Property Name="MarketingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaketID" Type="int" Nullable="false" />
+          <Property Name="ReklamaID" Type="int" Nullable="false" />
+          <Property Name="DatumOd" Type="date" Nullable="false" />
+          <Property Name="DatumDo" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Objekti">
+          <Key>
+            <PropertyRef Name="ObjekatID" />
+          </Key>
+          <Property Name="ObjekatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Adresa" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="TipId" Type="int" Nullable="false" />
+          <Property Name="KontaktTelefon" Type="nvarchar" MaxLength="500" />
+          <Property Name="KontaktOsoba" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Paketi">
+          <Key>
+            <PropertyRef Name="PaketID" />
+          </Key>
+          <Property Name="PaketID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PaketiTelevizije">
+          <Key>
+            <PropertyRef Name="PaketiTelevizijeID" />
+          </Key>
+          <Property Name="PaketiTelevizijeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaketID" Type="int" Nullable="false" />
+          <Property Name="TelevizijaID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PaketiTermini">
+          <Key>
+            <PropertyRef Name="PaketiTerminiID" />
+          </Key>
+          <Property Name="PaketiTerminiID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaketID" Type="int" Nullable="false" />
+          <Property Name="Termin" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reklama">
+          <Key>
+            <PropertyRef Name="ReklamaID" />
+          </Key>
+          <Property Name="ReklamaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Video" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="KlijentID" Type="int" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DuzinaReklame" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Televizije">
+          <Key>
+            <PropertyRef Name="TelevizijaID" />
+          </Key>
+          <Property Name="TelevizijaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GradID" Type="int" Nullable="false" />
+          <Property Name="ObjekatId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipObjekta">
+          <Key>
+            <PropertyRef Name="TipObjektaID" />
+          </Key>
+          <Property Name="TipObjektaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CheckUpdateAndroid">
+          <Key>
+            <PropertyRef Name="UpdateID" />
+          </Key>
+          <Property Name="UpdateID" Type="int" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="errorAndroid">
+          <Key>
+            <PropertyRef Name="ErrorID" />
+          </Key>
+          <Property Name="ErrorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nazivTV" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Vrijeme" Type="datetime" Nullable="false" />
+          <Property Name="TipErrora" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Marketing_Paketi">
+          <End Role="Paketi" Type="Self.Paketi" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Marketing" Type="Self.Marketing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paketi">
+              <PropertyRef Name="PaketID" />
+            </Principal>
+            <Dependent Role="Marketing">
+              <PropertyRef Name="PaketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Marketing_Reklama">
+          <End Role="Reklama" Type="Self.Reklama" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Marketing" Type="Self.Marketing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reklama">
+              <PropertyRef Name="ReklamaID" />
+            </Principal>
+            <Dependent Role="Marketing">
+              <PropertyRef Name="ReklamaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Objekti_TipObjekta">
+          <End Role="TipObjekta" Type="Self.TipObjekta" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Objekti" Type="Self.Objekti" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipObjekta">
+              <PropertyRef Name="TipObjektaID" />
+            </Principal>
+            <Dependent Role="Objekti">
+              <PropertyRef Name="TipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaketiTelevizije_Paketi">
+          <End Role="Paketi" Type="Self.Paketi" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PaketiTelevizije" Type="Self.PaketiTelevizije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paketi">
+              <PropertyRef Name="PaketID" />
+            </Principal>
+            <Dependent Role="PaketiTelevizije">
+              <PropertyRef Name="PaketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaketiTelevizije_Televizije">
+          <End Role="Televizije" Type="Self.Televizije" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PaketiTelevizije" Type="Self.PaketiTelevizije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Televizije">
+              <PropertyRef Name="TelevizijaID" />
+            </Principal>
+            <Dependent Role="PaketiTelevizije">
+              <PropertyRef Name="TelevizijaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaketiTermini_Paketi">
+          <End Role="Paketi" Type="Self.Paketi" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PaketiTermini" Type="Self.PaketiTermini" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paketi">
+              <PropertyRef Name="PaketID" />
+            </Principal>
+            <Dependent Role="PaketiTermini">
+              <PropertyRef Name="PaketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reklama_Klijenti">
+          <End Role="Klijenti" Type="Self.Klijenti" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reklama" Type="Self.Reklama" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klijenti">
+              <PropertyRef Name="KlijentID" />
+            </Principal>
+            <Dependent Role="Reklama">
+              <PropertyRef Name="KlijentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Televizije_Gradovi">
+          <End Role="Gradovi" Type="Self.Gradovi" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Televizije" Type="Self.Televizije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gradovi">
+              <PropertyRef Name="GradID" />
+            </Principal>
+            <Dependent Role="Televizije">
+              <PropertyRef Name="GradID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Televizije_Objekti">
+          <End Role="Objekti" Type="Self.Objekti" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Televizije" Type="Self.Televizije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Objekti">
+              <PropertyRef Name="ObjekatID" />
+            </Principal>
+            <Dependent Role="Televizije">
+              <PropertyRef Name="ObjekatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="BrisiGrad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GradID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="BrisiKlijent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KlijentID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="BrisiMarketing" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MarketingID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="BrisiObjekat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ObjekatID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="BrisiPaket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PaketID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="BrisiPaketFromPaketiTelevizije" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PaketID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="BrisiPaketiTermini" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PaketID" Type="int" Mode="In" />
+          <Parameter Name="Termin" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="BrisiPaketTelevizija" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PaketTelevizijaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="BrisiReklamu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReklamaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="BrisiTeleviziju" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TelevizijaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="BrisiTipObjekta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TipID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DodajDane" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MarketingID" Type="int" Mode="In" />
+          <Parameter Name="Dan" Type="date" Mode="In" />
+        </Function>
+        <Function Name="DodajGrad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="DodajKlijent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+          <Parameter Name="KontaktTelefon" Type="nvarchar" Mode="In" />
+          <Parameter Name="KontaktOsoba" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="DodajMarketing" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PaketID" Type="int" Mode="In" />
+          <Parameter Name="ReklamaID" Type="int" Mode="In" />
+          <Parameter Name="DatumOD" Type="date" Mode="In" />
+          <Parameter Name="DatumDO" Type="date" Mode="In" />
+        </Function>
+        <Function Name="DodajObjekat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Adresa" Type="nvarchar" Mode="In" />
+          <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+          <Parameter Name="TipObjektaID" Type="int" Mode="In" />
+          <Parameter Name="KontaktTelefon" Type="nvarchar" Mode="In" />
+          <Parameter Name="KontaktOsoba" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="DodajPaket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="DodajPaketiTelevizije" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PaketID" Type="int" Mode="In" />
+          <Parameter Name="TelevizijaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DodajPaketiTermini" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PaketID" Type="int" Mode="In" />
+          <Parameter Name="Termin" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="DodajReklamu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Naziv" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Video" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="KlijentID" Type="int" Mode="In" />
+          <Parameter Name="Duzina" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DodajTeleviziju" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+          <Parameter Name="GradID" Type="int" Mode="In" />
+          <Parameter Name="ObjekatID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DodajTipObjekta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Info" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TvID" Type="int" Mode="In" />
+          <Parameter Name="Datum" Type="date" Mode="In" />
+        </Function>
+        <Function Name="IzmjeniObjekat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Adresa" Type="nvarchar" Mode="In" />
+          <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+          <Parameter Name="TipObjektaID" Type="int" Mode="In" />
+          <Parameter Name="ObjekatID" Type="int" Mode="In" />
+          <Parameter Name="KontaktTelefon" Type="nvarchar" Mode="In" />
+          <Parameter Name="KontaktOsoba" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="IzmjeniReklamu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReklamaID" Type="int" Mode="In" />
+          <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+          <Parameter Name="KlijentID" Type="int" Mode="In" />
+          <Parameter Name="Video" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="IzmjeniTeleviziju" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TelevizijaID" Type="int" Mode="In" />
+          <Parameter Name="GradID" Type="int" Mode="In" />
+          <Parameter Name="ObjekatID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="KlijentByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KlijentID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="MarketingByReklama" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReklamaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="MarketingKlijentPrikaz" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KlijentID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="MarketingProvjera" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="paketID" Type="int" Mode="In" />
+          <Parameter Name="reklamaID" Type="int" Mode="In" />
+          <Parameter Name="DatumOD" Type="date" Mode="In" />
+          <Parameter Name="DatumDO" Type="date" Mode="In" />
+        </Function>
+        <Function Name="ObjekatByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ObjekatID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ObjekatByNaziv" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ObjekatNaziv" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ObjektiSaTipovima" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ObrisiTvByObjekat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ObjekatID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ObrišiTvFromPaketiTelevizije" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TelevizijaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="PaketByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="PaketInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PaketID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="PaketiTelevizijeByPaketIDTelevizijaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PaketID" Type="int" Mode="In" />
+          <Parameter Name="TelevizijaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="PaketiTerminiProvjera" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PaketID" Type="int" Mode="In" />
+          <Parameter Name="Termin" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ProvjeraSlobodnihDana" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PaketID" Type="int" Mode="In" />
+          <Parameter Name="Dan" Type="date" Mode="In" />
+        </Function>
+        <Function Name="ReklamaByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReklamaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ReklamaByNaziv" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ReklameByKlijent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KlijentID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SveReklame" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SveTelevizije" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SviGradovi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SviKlijenti" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SviObjekti" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SviPaketi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SviTipoviObjekta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="TelevizijaByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TelevizijaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TelevizijaByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NazivTV" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="TelevizijeByPaket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="paketID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TelevizijeInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="TerminiByPaket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="paketID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TipOBjektaByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TipOBjekta" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="DeleteError" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="goldelec_goldelec">
+          <Parameter Name="errorID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertError" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="goldelec_goldelec">
+          <Parameter Name="NazivTV" Type="nvarchar" Mode="In" />
+          <Parameter Name="Vrijeme" Type="datetime" Mode="In" />
+          <Parameter Name="TipErrora" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SelectError" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="goldelec_goldelec" />
+        <Function Name="SelectErrorUpdateProvjera" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="goldelec_goldelec">
+          <Parameter Name="TV" Type="nvarchar" Mode="In" />
+          <Parameter Name="Vrijeme" Type="datetime" Mode="In" />
+          <Parameter Name="Tiperrora" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateAndroidDodaj" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="goldelec_goldelec">
+          <Parameter Name="Number" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UPDATEANDROIDTRENUTNISTATUS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="goldelec_goldelec" />
+        <Function Name="UpdateError" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="goldelec_goldelec">
+          <Parameter Name="NazivTV" Type="nvarchar" Mode="In" />
+          <Parameter Name="TipErrora" Type="nvarchar" Mode="In" />
+          <Parameter Name="Vrijeme" Type="datetime" Mode="In" />
+        </Function>
+        <EntityContainer Name="goldelec_screenAdsModelStoreContainer">
+          <EntitySet Name="Gradovi" EntityType="Self.Gradovi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Klijenti" EntityType="Self.Klijenti" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marketing" EntityType="Self.Marketing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Objekti" EntityType="Self.Objekti" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paketi" EntityType="Self.Paketi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaketiTelevizije" EntityType="Self.PaketiTelevizije" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaketiTermini" EntityType="Self.PaketiTermini" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reklama" EntityType="Self.Reklama" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Televizije" EntityType="Self.Televizije" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipObjekta" EntityType="Self.TipObjekta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CheckUpdateAndroid" EntityType="Self.CheckUpdateAndroid" Schema="goldelec_goldelec" store:Type="Tables" />
+          <EntitySet Name="errorAndroid" EntityType="Self.errorAndroid" Schema="goldelec_goldelec" store:Type="Tables" />
+          <AssociationSet Name="FK_Marketing_Paketi" Association="Self.FK_Marketing_Paketi">
+            <End Role="Paketi" EntitySet="Paketi" />
+            <End Role="Marketing" EntitySet="Marketing" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Marketing_Reklama" Association="Self.FK_Marketing_Reklama">
+            <End Role="Reklama" EntitySet="Reklama" />
+            <End Role="Marketing" EntitySet="Marketing" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Objekti_TipObjekta" Association="Self.FK_Objekti_TipObjekta">
+            <End Role="TipObjekta" EntitySet="TipObjekta" />
+            <End Role="Objekti" EntitySet="Objekti" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaketiTelevizije_Paketi" Association="Self.FK_PaketiTelevizije_Paketi">
+            <End Role="Paketi" EntitySet="Paketi" />
+            <End Role="PaketiTelevizije" EntitySet="PaketiTelevizije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaketiTelevizije_Televizije" Association="Self.FK_PaketiTelevizije_Televizije">
+            <End Role="Televizije" EntitySet="Televizije" />
+            <End Role="PaketiTelevizije" EntitySet="PaketiTelevizije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaketiTermini_Paketi" Association="Self.FK_PaketiTermini_Paketi">
+            <End Role="Paketi" EntitySet="Paketi" />
+            <End Role="PaketiTermini" EntitySet="PaketiTermini" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reklama_Klijenti" Association="Self.FK_Reklama_Klijenti">
+            <End Role="Klijenti" EntitySet="Klijenti" />
+            <End Role="Reklama" EntitySet="Reklama" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Televizije_Gradovi" Association="Self.FK_Televizije_Gradovi">
+            <End Role="Gradovi" EntitySet="Gradovi" />
+            <End Role="Televizije" EntitySet="Televizije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Televizije_Objekti" Association="Self.FK_Televizije_Objekti">
+            <End Role="Objekti" EntitySet="Objekti" />
+            <End Role="Televizije" EntitySet="Televizije" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="goldelec_screenAdsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Gradovi">
+          <Key>
+            <PropertyRef Name="GradID" />
+          </Key>
+          <Property Name="GradID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Televizije" Relationship="Self.FK_Televizije_Gradovi" FromRole="Gradovi" ToRole="Televizije" />
+        </EntityType>
+        <EntityType Name="Klijenti">
+          <Key>
+            <PropertyRef Name="KlijentID" />
+          </Key>
+          <Property Name="KlijentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KontaktTelefon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KontaktOsoba" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Reklama" Relationship="Self.FK_Reklama_Klijenti" FromRole="Klijenti" ToRole="Reklama" />
+        </EntityType>
+        <EntityType Name="Marketing">
+          <Key>
+            <PropertyRef Name="MarketingID" />
+          </Key>
+          <Property Name="MarketingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaketID" Type="Int32" Nullable="false" />
+          <Property Name="ReklamaID" Type="Int32" Nullable="false" />
+          <Property Name="DatumOd" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DatumDo" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Paketi" Relationship="Self.FK_Marketing_Paketi" FromRole="Marketing" ToRole="Paketi" />
+          <NavigationProperty Name="Reklama" Relationship="Self.FK_Marketing_Reklama" FromRole="Marketing" ToRole="Reklama" />
+        </EntityType>
+        <EntityType Name="Objekti">
+          <Key>
+            <PropertyRef Name="ObjekatID" />
+          </Key>
+          <Property Name="ObjekatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adresa" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Naziv" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TipId" Type="Int32" Nullable="false" />
+          <Property Name="KontaktTelefon" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="KontaktOsoba" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TipObjekta" Relationship="Self.FK_Objekti_TipObjekta" FromRole="Objekti" ToRole="TipObjekta" />
+          <NavigationProperty Name="Televizije" Relationship="Self.FK_Televizije_Objekti" FromRole="Objekti" ToRole="Televizije" />
+        </EntityType>
+        <EntityType Name="Paketi">
+          <Key>
+            <PropertyRef Name="PaketID" />
+          </Key>
+          <Property Name="PaketID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Marketing" Relationship="Self.FK_Marketing_Paketi" FromRole="Paketi" ToRole="Marketing" />
+          <NavigationProperty Name="PaketiTelevizije" Relationship="Self.FK_PaketiTelevizije_Paketi" FromRole="Paketi" ToRole="PaketiTelevizije" />
+          <NavigationProperty Name="PaketiTermini" Relationship="Self.FK_PaketiTermini_Paketi" FromRole="Paketi" ToRole="PaketiTermini" />
+        </EntityType>
+        <EntityType Name="PaketiTelevizije">
+          <Key>
+            <PropertyRef Name="PaketiTelevizijeID" />
+          </Key>
+          <Property Name="PaketiTelevizijeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaketID" Type="Int32" Nullable="false" />
+          <Property Name="TelevizijaID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Paketi" Relationship="Self.FK_PaketiTelevizije_Paketi" FromRole="PaketiTelevizije" ToRole="Paketi" />
+          <NavigationProperty Name="Televizije" Relationship="Self.FK_PaketiTelevizije_Televizije" FromRole="PaketiTelevizije" ToRole="Televizije" />
+        </EntityType>
+        <EntityType Name="PaketiTermini">
+          <Key>
+            <PropertyRef Name="PaketiTerminiID" />
+          </Key>
+          <Property Name="PaketiTerminiID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaketID" Type="Int32" Nullable="false" />
+          <Property Name="Termin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Paketi" Relationship="Self.FK_PaketiTermini_Paketi" FromRole="PaketiTermini" ToRole="Paketi" />
+        </EntityType>
+        <EntityType Name="Reklama">
+          <Key>
+            <PropertyRef Name="ReklamaID" />
+          </Key>
+          <Property Name="ReklamaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Video" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KlijentID" Type="Int32" Nullable="false" />
+          <Property Name="Naziv" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DuzinaReklame" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Klijenti" Relationship="Self.FK_Reklama_Klijenti" FromRole="Reklama" ToRole="Klijenti" />
+          <NavigationProperty Name="Marketing" Relationship="Self.FK_Marketing_Reklama" FromRole="Reklama" ToRole="Marketing" />
+        </EntityType>
+        <EntityType Name="Televizije">
+          <Key>
+            <PropertyRef Name="TelevizijaID" />
+          </Key>
+          <Property Name="TelevizijaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GradID" Type="Int32" Nullable="false" />
+          <Property Name="ObjekatId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Gradovi" Relationship="Self.FK_Televizije_Gradovi" FromRole="Televizije" ToRole="Gradovi" />
+          <NavigationProperty Name="Objekti" Relationship="Self.FK_Televizije_Objekti" FromRole="Televizije" ToRole="Objekti" />
+          <NavigationProperty Name="PaketiTelevizije" Relationship="Self.FK_PaketiTelevizije_Televizije" FromRole="Televizije" ToRole="PaketiTelevizije" />
+        </EntityType>
+        <EntityType Name="TipObjekta">
+          <Key>
+            <PropertyRef Name="TipObjektaID" />
+          </Key>
+          <Property Name="TipObjektaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Objekti" Relationship="Self.FK_Objekti_TipObjekta" FromRole="TipObjekta" ToRole="Objekti" />
+        </EntityType>
+        <Association Name="FK_Televizije_Gradovi">
+          <End Role="Gradovi" Type="Self.Gradovi" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Televizije" Type="Self.Televizije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gradovi">
+              <PropertyRef Name="GradID" />
+            </Principal>
+            <Dependent Role="Televizije">
+              <PropertyRef Name="GradID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reklama_Klijenti">
+          <End Role="Klijenti" Type="Self.Klijenti" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reklama" Type="Self.Reklama" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klijenti">
+              <PropertyRef Name="KlijentID" />
+            </Principal>
+            <Dependent Role="Reklama">
+              <PropertyRef Name="KlijentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Marketing_Paketi">
+          <End Role="Paketi" Type="Self.Paketi" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Marketing" Type="Self.Marketing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paketi">
+              <PropertyRef Name="PaketID" />
+            </Principal>
+            <Dependent Role="Marketing">
+              <PropertyRef Name="PaketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Marketing_Reklama">
+          <End Role="Reklama" Type="Self.Reklama" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Marketing" Type="Self.Marketing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reklama">
+              <PropertyRef Name="ReklamaID" />
+            </Principal>
+            <Dependent Role="Marketing">
+              <PropertyRef Name="ReklamaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Objekti_TipObjekta">
+          <End Role="TipObjekta" Type="Self.TipObjekta" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Objekti" Type="Self.Objekti" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipObjekta">
+              <PropertyRef Name="TipObjektaID" />
+            </Principal>
+            <Dependent Role="Objekti">
+              <PropertyRef Name="TipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Televizije_Objekti">
+          <End Role="Objekti" Type="Self.Objekti" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Televizije" Type="Self.Televizije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Objekti">
+              <PropertyRef Name="ObjekatID" />
+            </Principal>
+            <Dependent Role="Televizije">
+              <PropertyRef Name="ObjekatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaketiTelevizije_Paketi">
+          <End Role="Paketi" Type="Self.Paketi" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PaketiTelevizije" Type="Self.PaketiTelevizije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paketi">
+              <PropertyRef Name="PaketID" />
+            </Principal>
+            <Dependent Role="PaketiTelevizije">
+              <PropertyRef Name="PaketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaketiTermini_Paketi">
+          <End Role="Paketi" Type="Self.Paketi" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PaketiTermini" Type="Self.PaketiTermini" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paketi">
+              <PropertyRef Name="PaketID" />
+            </Principal>
+            <Dependent Role="PaketiTermini">
+              <PropertyRef Name="PaketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaketiTelevizije_Televizije">
+          <End Role="Televizije" Type="Self.Televizije" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PaketiTelevizije" Type="Self.PaketiTelevizije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Televizije">
+              <PropertyRef Name="TelevizijaID" />
+            </Principal>
+            <Dependent Role="PaketiTelevizije">
+              <PropertyRef Name="TelevizijaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="goldelec_screenAdsEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Gradovi" EntityType="Self.Gradovi" />
+          <EntitySet Name="Klijenti" EntityType="Self.Klijenti" />
+          <EntitySet Name="Marketing" EntityType="Self.Marketing" />
+          <EntitySet Name="Objekti" EntityType="Self.Objekti" />
+          <EntitySet Name="Paketi" EntityType="Self.Paketi" />
+          <EntitySet Name="PaketiTelevizije" EntityType="Self.PaketiTelevizije" />
+          <EntitySet Name="PaketiTermini" EntityType="Self.PaketiTermini" />
+          <EntitySet Name="Reklama" EntityType="Self.Reklama" />
+          <EntitySet Name="Televizije" EntityType="Self.Televizije" />
+          <EntitySet Name="TipObjekta" EntityType="Self.TipObjekta" />
+          <AssociationSet Name="FK_Televizije_Gradovi" Association="Self.FK_Televizije_Gradovi">
+            <End Role="Gradovi" EntitySet="Gradovi" />
+            <End Role="Televizije" EntitySet="Televizije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reklama_Klijenti" Association="Self.FK_Reklama_Klijenti">
+            <End Role="Klijenti" EntitySet="Klijenti" />
+            <End Role="Reklama" EntitySet="Reklama" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Marketing_Paketi" Association="Self.FK_Marketing_Paketi">
+            <End Role="Paketi" EntitySet="Paketi" />
+            <End Role="Marketing" EntitySet="Marketing" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Marketing_Reklama" Association="Self.FK_Marketing_Reklama">
+            <End Role="Reklama" EntitySet="Reklama" />
+            <End Role="Marketing" EntitySet="Marketing" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Objekti_TipObjekta" Association="Self.FK_Objekti_TipObjekta">
+            <End Role="TipObjekta" EntitySet="TipObjekta" />
+            <End Role="Objekti" EntitySet="Objekti" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Televizije_Objekti" Association="Self.FK_Televizije_Objekti">
+            <End Role="Objekti" EntitySet="Objekti" />
+            <End Role="Televizije" EntitySet="Televizije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaketiTelevizije_Paketi" Association="Self.FK_PaketiTelevizije_Paketi">
+            <End Role="Paketi" EntitySet="Paketi" />
+            <End Role="PaketiTelevizije" EntitySet="PaketiTelevizije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaketiTermini_Paketi" Association="Self.FK_PaketiTermini_Paketi">
+            <End Role="Paketi" EntitySet="Paketi" />
+            <End Role="PaketiTermini" EntitySet="PaketiTermini" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaketiTelevizije_Televizije" Association="Self.FK_PaketiTelevizije_Televizije">
+            <End Role="Televizije" EntitySet="Televizije" />
+            <End Role="PaketiTelevizije" EntitySet="PaketiTelevizije" />
+          </AssociationSet>
+          <FunctionImport Name="BrisiGrad">
+          <Parameter Name="GradID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BrisiKlijent">
+          <Parameter Name="KlijentID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BrisiMarketing">
+          <Parameter Name="MarketingID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BrisiObjekat">
+          <Parameter Name="ObjekatID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BrisiPaket">
+          <Parameter Name="PaketID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BrisiPaketFromPaketiTelevizije">
+          <Parameter Name="PaketID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BrisiPaketiTermini">
+            <Parameter Name="PaketID" Mode="In" Type="Int32" />
+            <Parameter Name="Termin" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="BrisiPaketTelevizija">
+          <Parameter Name="PaketTelevizijaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BrisiReklamu">
+          <Parameter Name="ReklamaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BrisiTeleviziju">
+          <Parameter Name="TelevizijaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BrisiTipObjekta">
+          <Parameter Name="TipID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DodajDane">
+            <Parameter Name="MarketingID" Mode="In" Type="Int32" />
+            <Parameter Name="Dan" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="DodajGrad">
+          <Parameter Name="Naziv" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DodajKlijent">
+            <Parameter Name="Naziv" Mode="In" Type="String" />
+            <Parameter Name="KontaktTelefon" Mode="In" Type="String" />
+            <Parameter Name="KontaktOsoba" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DodajMarketing">
+            <Parameter Name="PaketID" Mode="In" Type="Int32" />
+            <Parameter Name="ReklamaID" Mode="In" Type="Int32" />
+            <Parameter Name="DatumOD" Mode="In" Type="DateTime" />
+            <Parameter Name="DatumDO" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="DodajObjekat">
+            <Parameter Name="Adresa" Mode="In" Type="String" />
+            <Parameter Name="Naziv" Mode="In" Type="String" />
+            <Parameter Name="TipObjektaID" Mode="In" Type="Int32" />
+            <Parameter Name="KontaktTelefon" Mode="In" Type="String" />
+            <Parameter Name="KontaktOsoba" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DodajPaket">
+          <Parameter Name="Naziv" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DodajPaketiTelevizije">
+            <Parameter Name="PaketID" Mode="In" Type="Int32" />
+            <Parameter Name="TelevizijaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DodajPaketiTermini">
+            <Parameter Name="PaketID" Mode="In" Type="Int32" />
+            <Parameter Name="Termin" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DodajReklamu">
+            <Parameter Name="Naziv" Mode="In" Type="String" />
+            <Parameter Name="Video" Mode="In" Type="String" />
+            <Parameter Name="KlijentID" Mode="In" Type="Int32" />
+            <Parameter Name="Duzina" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DodajTeleviziju">
+            <Parameter Name="Naziv" Mode="In" Type="String" />
+            <Parameter Name="GradID" Mode="In" Type="Int32" />
+            <Parameter Name="ObjekatID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DodajTipObjekta">
+          <Parameter Name="Naziv" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Info" ReturnType="Collection(goldelec_screenAdsModel.Info_Result)">
+            <Parameter Name="TvID" Mode="In" Type="Int32" />
+            <Parameter Name="Datum" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="IzmjeniObjekat">
+            <Parameter Name="Adresa" Mode="In" Type="String" />
+            <Parameter Name="Naziv" Mode="In" Type="String" />
+            <Parameter Name="TipObjektaID" Mode="In" Type="Int32" />
+            <Parameter Name="ObjekatID" Mode="In" Type="Int32" />
+            <Parameter Name="KontaktTelefon" Mode="In" Type="String" />
+            <Parameter Name="KontaktOsoba" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="IzmjeniReklamu">
+            <Parameter Name="ReklamaID" Mode="In" Type="Int32" />
+            <Parameter Name="Naziv" Mode="In" Type="String" />
+            <Parameter Name="KlijentID" Mode="In" Type="Int32" />
+            <Parameter Name="Video" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="IzmjeniTeleviziju">
+            <Parameter Name="TelevizijaID" Mode="In" Type="Int32" />
+            <Parameter Name="GradID" Mode="In" Type="Int32" />
+            <Parameter Name="ObjekatID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="KlijentByID" ReturnType="Collection(goldelec_screenAdsModel.KlijentByID_Result)">
+          <Parameter Name="KlijentID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MarketingByReklama" ReturnType="Collection(goldelec_screenAdsModel.MarketingByReklama_Result)">
+          <Parameter Name="ReklamaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MarketingKlijentPrikaz" ReturnType="Collection(goldelec_screenAdsModel.MarketingKlijentPrikaz_Result)">
+          <Parameter Name="KlijentID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MarketingProvjera" ReturnType="Collection(goldelec_screenAdsModel.MarketingProvjera_Result)">
+            <Parameter Name="paketID" Mode="In" Type="Int32" />
+            <Parameter Name="reklamaID" Mode="In" Type="Int32" />
+            <Parameter Name="DatumOD" Mode="In" Type="DateTime" />
+            <Parameter Name="DatumDO" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ObjekatByID" ReturnType="Collection(goldelec_screenAdsModel.ObjekatByID_Result)">
+          <Parameter Name="ObjekatID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ObjekatByNaziv" ReturnType="Collection(goldelec_screenAdsModel.ObjekatByNaziv_Result)">
+          <Parameter Name="ObjekatNaziv" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ObjektiSaTipovima" ReturnType="Collection(goldelec_screenAdsModel.ObjektiSaTipovima_Result)" />
+          <FunctionImport Name="ObrisiTvByObjekat">
+          <Parameter Name="ObjekatID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ObrišiTvFromPaketiTelevizije">
+          <Parameter Name="TelevizijaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="PaketByName" ReturnType="Collection(goldelec_screenAdsModel.PaketByName_Result)">
+          <Parameter Name="Naziv" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PaketInfo" ReturnType="Collection(goldelec_screenAdsModel.PaketInfo_Result)">
+          <Parameter Name="PaketID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="PaketiTelevizijeByPaketIDTelevizijaID" ReturnType="Collection(goldelec_screenAdsModel.PaketiTelevizijeByPaketIDTelevizijaID_Result)">
+            <Parameter Name="PaketID" Mode="In" Type="Int32" />
+            <Parameter Name="TelevizijaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="PaketiTerminiProvjera" ReturnType="Collection(goldelec_screenAdsModel.PaketiTerminiProvjera_Result)">
+            <Parameter Name="PaketID" Mode="In" Type="Int32" />
+            <Parameter Name="Termin" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ProvjeraSlobodnihDana" ReturnType="Collection(goldelec_screenAdsModel.ProvjeraSlobodnihDana_Result)">
+            <Parameter Name="PaketID" Mode="In" Type="Int32" />
+            <Parameter Name="Dan" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ReklamaByID" ReturnType="Collection(goldelec_screenAdsModel.ReklamaByID_Result)">
+          <Parameter Name="ReklamaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ReklamaByNaziv" ReturnType="Collection(goldelec_screenAdsModel.ReklamaByNaziv_Result)">
+          <Parameter Name="Naziv" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ReklameByKlijent" ReturnType="Collection(goldelec_screenAdsModel.ReklameByKlijent_Result)">
+          <Parameter Name="KlijentID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SveReklame" ReturnType="Collection(goldelec_screenAdsModel.SveReklame_Result)" />
+          <FunctionImport Name="SveTelevizije" ReturnType="Collection(goldelec_screenAdsModel.SveTelevizije_Result)" />
+          <FunctionImport Name="SviGradovi" ReturnType="Collection(goldelec_screenAdsModel.SviGradovi_Result)" />
+          <FunctionImport Name="SviKlijenti" ReturnType="Collection(goldelec_screenAdsModel.SviKlijenti_Result)" />
+          <FunctionImport Name="SviObjekti" ReturnType="Collection(goldelec_screenAdsModel.SviObjekti_Result)" />
+          <FunctionImport Name="SviPaketi" ReturnType="Collection(goldelec_screenAdsModel.SviPaketi_Result)" />
+          <FunctionImport Name="SviTipoviObjekta" ReturnType="Collection(goldelec_screenAdsModel.SviTipoviObjekta_Result)" />
+          <FunctionImport Name="TelevizijaByID" ReturnType="Collection(goldelec_screenAdsModel.TelevizijaByID_Result)">
+          <Parameter Name="TelevizijaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TelevizijaByName" ReturnType="Collection(goldelec_screenAdsModel.TelevizijaByName_Result)">
+          <Parameter Name="NazivTV" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="TelevizijeByPaket" ReturnType="Collection(goldelec_screenAdsModel.TelevizijeByPaket_Result)">
+          <Parameter Name="paketID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TelevizijeInfo" ReturnType="Collection(goldelec_screenAdsModel.TelevizijeInfo_Result)" />
+          <FunctionImport Name="TerminiByPaket" ReturnType="Collection(goldelec_screenAdsModel.TerminiByPaket_Result)">
+          <Parameter Name="paketID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TipOBjektaByName" ReturnType="Collection(goldelec_screenAdsModel.TipOBjektaByName_Result)">
+          <Parameter Name="TipOBjekta" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="CheckUpdateAndroid" EntityType="goldelec_screenAdsModel.CheckUpdateAndroid" />
+          <FunctionImport Name="UpdateAndroidDodaj">
+          <Parameter Name="Number" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UPDATEANDROIDTRENUTNISTATUS" ReturnType="Collection(Int32)" />
+          <EntitySet Name="errorAndroid" EntityType="goldelec_screenAdsModel.errorAndroid" />
+          <FunctionImport Name="DeleteError">
+          <Parameter Name="errorID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertError">
+            <Parameter Name="NazivTV" Mode="In" Type="String" />
+            <Parameter Name="Vrijeme" Mode="In" Type="DateTime" />
+            <Parameter Name="TipErrora" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SelectError" ReturnType="Collection(goldelec_screenAdsModel.SelectError_Result)" />
+          <FunctionImport Name="UpdateError" ReturnType="Collection(goldelec_screenAdsModel.UpdateError_Result)">
+            <Parameter Name="NazivTV" Mode="In" Type="String" />
+            <Parameter Name="TipErrora" Mode="In" Type="String" />
+            <Parameter Name="Vrijeme" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SelectErrorUpdateProvjera" ReturnType="Collection(goldelec_screenAdsModel.SelectErrorUpdateProvjera_Result)">
+            <Parameter Name="TV" Mode="In" Type="String" />
+            <Parameter Name="Vrijeme" Mode="In" Type="DateTime" />
+            <Parameter Name="Tiperrora" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="Info_Result">
+          <Property Type="Int32" Name="MarketingID" Nullable="false" />
+          <Property Type="String" Name="NazivReklame" Nullable="false" />
+          <Property Type="String" Name="Video" Nullable="false" />
+          <Property Type="String" Name="NazivPaketa" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Termin" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="KlijentByID_Result">
+          <Property Type="Int32" Name="KlijentID" Nullable="false" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="KontaktTelefon" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="KontaktOsoba" Nullable="false" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="MarketingByReklama_Result">
+          <Property Type="Int32" Name="MarketingID" Nullable="false" />
+          <Property Type="DateTime" Name="DatumOd" Nullable="false" />
+          <Property Type="DateTime" Name="DatumDo" Nullable="false" />
+          <Property Type="String" Name="Paket" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="MarketingKlijentPrikaz_Result">
+          <Property Type="Int32" Name="MarketingID" Nullable="false" />
+          <Property Type="String" Name="NazivPaketa" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NazivVidea" Nullable="false" />
+          <Property Type="String" Name="NazivKlijenta" Nullable="false" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="MarketingProvjera_Result">
+          <Property Type="Int32" Name="MarketingID" Nullable="false" />
+          <Property Type="Int32" Name="PaketID" Nullable="false" />
+          <Property Type="Int32" Name="ReklamaID" Nullable="false" />
+          <Property Type="DateTime" Name="DatumOd" Nullable="false" />
+          <Property Type="DateTime" Name="DatumDo" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ObjekatByID_Result">
+          <Property Type="Int32" Name="ObjekatID" Nullable="false" />
+          <Property Type="String" Name="NazivObjekta" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="AdresaObjekta" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="TipObjekta" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="KontaktOsoba" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="KontaktTelefon" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="ObjekatByNaziv_Result">
+          <Property Type="Int32" Name="ObjekatID" Nullable="false" />
+          <Property Type="String" Name="NazivObjekta" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="AdresaObjekta" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="TipObjekta" Nullable="false" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="ObjektiSaTipovima_Result">
+          <Property Type="Int32" Name="ObjekatID" Nullable="false" />
+          <Property Type="String" Name="KontaktOsoba" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="KontaktTelefon" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NazivObjekta" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="AdresaObjekta" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="TipObjekta" Nullable="false" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="PaketByName_Result">
+          <Property Type="Int32" Name="PaketID" Nullable="false" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="PaketInfo_Result">
+          <Property Type="String" Name="NazivTelevizije" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NazivGrada" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NazivObjekta" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="AdresaObjekta" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="TipObjektaNaziv" Nullable="false" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="PaketiTelevizijeByPaketIDTelevizijaID_Result">
+          <Property Type="Int32" Name="PaketiTelevizijeID" Nullable="false" />
+          <Property Type="Int32" Name="PaketID" Nullable="false" />
+          <Property Type="Int32" Name="TelevizijaID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="PaketiTerminiProvjera_Result">
+          <Property Type="Int32" Name="PaketiTerminiID" Nullable="false" />
+          <Property Type="Int32" Name="PaketID" Nullable="false" />
+          <Property Type="String" Name="Termin" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="ProvjeraSlobodnihDana_Result">
+          <Property Type="Int32" Name="MarketingID" Nullable="false" />
+          <Property Type="Int32" Name="PaketID" Nullable="false" />
+          <Property Type="String" Name="NazivReklame" Nullable="false" />
+          <Property Type="Int32" Name="DuzinaReklame" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ReklamaByID_Result">
+          <Property Type="Int32" Name="ReklamaID" Nullable="false" />
+          <Property Type="String" Name="Naziv" Nullable="false" />
+          <Property Type="String" Name="Video" Nullable="false" />
+          <Property Type="String" Name="Klijent" Nullable="false" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="ReklamaByNaziv_Result">
+          <Property Type="Int32" Name="ReklamaID" Nullable="false" />
+          <Property Type="String" Name="Video" Nullable="false" />
+          <Property Type="Int32" Name="KlijentID" Nullable="false" />
+          <Property Type="String" Name="Naziv" Nullable="false" />
+          <Property Type="Int32" Name="DuzinaReklame" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ReklameByKlijent_Result">
+          <Property Type="Int32" Name="ReklamaID" Nullable="false" />
+          <Property Type="String" Name="Video" Nullable="false" />
+          <Property Type="Int32" Name="KlijentID" Nullable="false" />
+          <Property Type="String" Name="Naziv" Nullable="false" />
+          <Property Type="Int32" Name="DuzinaReklame" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SveReklame_Result">
+          <Property Type="Int32" Name="ReklamaID" Nullable="false" />
+          <Property Type="String" Name="Naziv" Nullable="false" />
+          <Property Type="String" Name="Video" Nullable="false" />
+          <Property Type="Int32" Name="DuzinaReklame" Nullable="false" />
+          <Property Type="String" Name="Klijent" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="KontaktTelefon" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="KontaktOsoba" Nullable="false" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="SveTelevizije_Result">
+          <Property Type="Int32" Name="TelevizijaID" Nullable="false" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="GradID" Nullable="false" />
+          <Property Type="Int32" Name="ObjekatId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SviGradovi_Result">
+          <Property Type="Int32" Name="GradID" Nullable="false" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SviKlijenti_Result">
+          <Property Type="Int32" Name="KlijentID" Nullable="false" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="KontaktTelefon" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="KontaktOsoba" Nullable="false" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="SviObjekti_Result">
+          <Property Type="Int32" Name="ObjekatID" Nullable="false" />
+          <Property Type="String" Name="Adresa" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="500" />
+          <Property Type="Int32" Name="TipId" Nullable="false" />
+          <Property Type="String" Name="KontaktTelefon" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="KontaktOsoba" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="SviPaketi_Result">
+          <Property Type="Int32" Name="PaketID" Nullable="false" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SviTipoviObjekta_Result">
+          <Property Type="Int32" Name="TipObjektaID" Nullable="false" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="TelevizijaByID_Result">
+          <Property Type="Int32" Name="TelevizijaID" Nullable="false" />
+          <Property Type="String" Name="NazivTelevizije" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NazivGrada" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NazivObjekta" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="AdresaObjekta" Nullable="false" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="TelevizijaByName_Result">
+          <Property Type="Int32" Name="TelevizijaID" Nullable="false" />
+          <Property Type="String" Name="NazivTelevizije" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NazivGrada" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NazivObjekta" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="AdresaObjekta" Nullable="false" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="TelevizijeByPaket_Result">
+          <Property Type="Int32" Name="PaketiTelevizijeID" Nullable="false" />
+          <Property Type="String" Name="NazivTelevizije" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NazivGrada" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NazivObjekta" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="AdresaObjekta" Nullable="false" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="TelevizijeInfo_Result">
+          <Property Type="Int32" Name="TelevizijaID" Nullable="false" />
+          <Property Type="String" Name="NazivTelevizije" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NazivGrada" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NazivObjekta" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="AdresaObjekta" Nullable="false" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="TerminiByPaket_Result">
+          <Property Type="Int32" Name="PaketiTerminiID" Nullable="false" />
+          <Property Type="Int32" Name="PaketID" Nullable="false" />
+          <Property Type="String" Name="Termin" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="TipOBjektaByName_Result">
+          <Property Type="Int32" Name="TipObjektaID" Nullable="false" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="500" />
+        </ComplexType>
+        <EntityType Name="CheckUpdateAndroid">
+          <Key>
+            <PropertyRef Name="UpdateID" />
+          </Key>
+          <Property Name="UpdateID" Type="Int32" Nullable="false" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="UPDATEANDROIDTRENUTNISTATUS_Result">
+          <Property Type="Int32" Name="UpdateID" Nullable="false" />
+          <Property Type="Int32" Name="Number" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="errorAndroid">
+          <Key>
+            <PropertyRef Name="ErrorID" />
+          </Key>
+          <Property Name="ErrorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nazivTV" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Vrijeme" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TipErrora" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="SelectError_Result">
+          <Property Type="Int32" Name="ErrorID" Nullable="false" />
+          <Property Type="String" Name="nazivTV" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="Vrijeme" Nullable="false" Precision="23" />
+          <Property Type="String" Name="TipErrora" Nullable="false" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="UpdateError_Result">
+          <Property Type="DateTime" Name="Vrijeme" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="SelectErrorUpdateProvjera_Result">
+          <Property Type="Int32" Name="ErrorID" Nullable="false" />
+          <Property Type="String" Name="nazivTV" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="Vrijeme" Nullable="false" Precision="23" />
+          <Property Type="String" Name="TipErrora" Nullable="false" MaxLength="500" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="goldelec_screenAdsModelStoreContainer" CdmEntityContainer="goldelec_screenAdsEntities1">
+          <EntitySetMapping Name="Gradovi">
+            <EntityTypeMapping TypeName="goldelec_screenAdsModel.Gradovi">
+              <MappingFragment StoreEntitySet="Gradovi">
+                <ScalarProperty Name="GradID" ColumnName="GradID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Klijenti">
+            <EntityTypeMapping TypeName="goldelec_screenAdsModel.Klijenti">
+              <MappingFragment StoreEntitySet="Klijenti">
+                <ScalarProperty Name="KlijentID" ColumnName="KlijentID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="KontaktTelefon" ColumnName="KontaktTelefon" />
+                <ScalarProperty Name="KontaktOsoba" ColumnName="KontaktOsoba" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marketing">
+            <EntityTypeMapping TypeName="goldelec_screenAdsModel.Marketing">
+              <MappingFragment StoreEntitySet="Marketing">
+                <ScalarProperty Name="MarketingID" ColumnName="MarketingID" />
+                <ScalarProperty Name="PaketID" ColumnName="PaketID" />
+                <ScalarProperty Name="ReklamaID" ColumnName="ReklamaID" />
+                <ScalarProperty Name="DatumOd" ColumnName="DatumOd" />
+                <ScalarProperty Name="DatumDo" ColumnName="DatumDo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Objekti">
+            <EntityTypeMapping TypeName="goldelec_screenAdsModel.Objekti">
+              <MappingFragment StoreEntitySet="Objekti">
+                <ScalarProperty Name="ObjekatID" ColumnName="ObjekatID" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="TipId" ColumnName="TipId" />
+                <ScalarProperty Name="KontaktTelefon" ColumnName="KontaktTelefon" />
+                <ScalarProperty Name="KontaktOsoba" ColumnName="KontaktOsoba" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paketi">
+            <EntityTypeMapping TypeName="goldelec_screenAdsModel.Paketi">
+              <MappingFragment StoreEntitySet="Paketi">
+                <ScalarProperty Name="PaketID" ColumnName="PaketID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaketiTelevizije">
+            <EntityTypeMapping TypeName="goldelec_screenAdsModel.PaketiTelevizije">
+              <MappingFragment StoreEntitySet="PaketiTelevizije">
+                <ScalarProperty Name="PaketiTelevizijeID" ColumnName="PaketiTelevizijeID" />
+                <ScalarProperty Name="PaketID" ColumnName="PaketID" />
+                <ScalarProperty Name="TelevizijaID" ColumnName="TelevizijaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaketiTermini">
+            <EntityTypeMapping TypeName="goldelec_screenAdsModel.PaketiTermini">
+              <MappingFragment StoreEntitySet="PaketiTermini">
+                <ScalarProperty Name="PaketiTerminiID" ColumnName="PaketiTerminiID" />
+                <ScalarProperty Name="PaketID" ColumnName="PaketID" />
+                <ScalarProperty Name="Termin" ColumnName="Termin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reklama">
+            <EntityTypeMapping TypeName="goldelec_screenAdsModel.Reklama">
+              <MappingFragment StoreEntitySet="Reklama">
+                <ScalarProperty Name="ReklamaID" ColumnName="ReklamaID" />
+                <ScalarProperty Name="Video" ColumnName="Video" />
+                <ScalarProperty Name="KlijentID" ColumnName="KlijentID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="DuzinaReklame" ColumnName="DuzinaReklame" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Televizije">
+            <EntityTypeMapping TypeName="goldelec_screenAdsModel.Televizije">
+              <MappingFragment StoreEntitySet="Televizije">
+                <ScalarProperty Name="TelevizijaID" ColumnName="TelevizijaID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="GradID" ColumnName="GradID" />
+                <ScalarProperty Name="ObjekatId" ColumnName="ObjekatId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipObjekta">
+            <EntityTypeMapping TypeName="goldelec_screenAdsModel.TipObjekta">
+              <MappingFragment StoreEntitySet="TipObjekta">
+                <ScalarProperty Name="TipObjektaID" ColumnName="TipObjektaID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="BrisiGrad" FunctionName="goldelec_screenAdsModel.Store.BrisiGrad" />
+          <FunctionImportMapping FunctionImportName="BrisiKlijent" FunctionName="goldelec_screenAdsModel.Store.BrisiKlijent" />
+          <FunctionImportMapping FunctionImportName="BrisiMarketing" FunctionName="goldelec_screenAdsModel.Store.BrisiMarketing" />
+          <FunctionImportMapping FunctionImportName="BrisiObjekat" FunctionName="goldelec_screenAdsModel.Store.BrisiObjekat" />
+          <FunctionImportMapping FunctionImportName="BrisiPaket" FunctionName="goldelec_screenAdsModel.Store.BrisiPaket" />
+          <FunctionImportMapping FunctionImportName="BrisiPaketFromPaketiTelevizije" FunctionName="goldelec_screenAdsModel.Store.BrisiPaketFromPaketiTelevizije" />
+          <FunctionImportMapping FunctionImportName="BrisiPaketiTermini" FunctionName="goldelec_screenAdsModel.Store.BrisiPaketiTermini" />
+          <FunctionImportMapping FunctionImportName="BrisiPaketTelevizija" FunctionName="goldelec_screenAdsModel.Store.BrisiPaketTelevizija" />
+          <FunctionImportMapping FunctionImportName="BrisiReklamu" FunctionName="goldelec_screenAdsModel.Store.BrisiReklamu" />
+          <FunctionImportMapping FunctionImportName="BrisiTeleviziju" FunctionName="goldelec_screenAdsModel.Store.BrisiTeleviziju" />
+          <FunctionImportMapping FunctionImportName="BrisiTipObjekta" FunctionName="goldelec_screenAdsModel.Store.BrisiTipObjekta" />
+          <FunctionImportMapping FunctionImportName="DodajDane" FunctionName="goldelec_screenAdsModel.Store.DodajDane" />
+          <FunctionImportMapping FunctionImportName="DodajGrad" FunctionName="goldelec_screenAdsModel.Store.DodajGrad" />
+          <FunctionImportMapping FunctionImportName="DodajKlijent" FunctionName="goldelec_screenAdsModel.Store.DodajKlijent" />
+          <FunctionImportMapping FunctionImportName="DodajMarketing" FunctionName="goldelec_screenAdsModel.Store.DodajMarketing" />
+          <FunctionImportMapping FunctionImportName="DodajObjekat" FunctionName="goldelec_screenAdsModel.Store.DodajObjekat" />
+          <FunctionImportMapping FunctionImportName="DodajPaket" FunctionName="goldelec_screenAdsModel.Store.DodajPaket" />
+          <FunctionImportMapping FunctionImportName="DodajPaketiTelevizije" FunctionName="goldelec_screenAdsModel.Store.DodajPaketiTelevizije" />
+          <FunctionImportMapping FunctionImportName="DodajPaketiTermini" FunctionName="goldelec_screenAdsModel.Store.DodajPaketiTermini" />
+          <FunctionImportMapping FunctionImportName="DodajReklamu" FunctionName="goldelec_screenAdsModel.Store.DodajReklamu" />
+          <FunctionImportMapping FunctionImportName="DodajTeleviziju" FunctionName="goldelec_screenAdsModel.Store.DodajTeleviziju" />
+          <FunctionImportMapping FunctionImportName="DodajTipObjekta" FunctionName="goldelec_screenAdsModel.Store.DodajTipObjekta" />
+          <FunctionImportMapping FunctionImportName="Info" FunctionName="goldelec_screenAdsModel.Store.Info">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.Info_Result">
+                <ScalarProperty Name="MarketingID" ColumnName="MarketingID" />
+                <ScalarProperty Name="NazivReklame" ColumnName="NazivReklame" />
+                <ScalarProperty Name="Video" ColumnName="Video" />
+                <ScalarProperty Name="NazivPaketa" ColumnName="NazivPaketa" />
+                <ScalarProperty Name="Termin" ColumnName="Termin" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="IzmjeniObjekat" FunctionName="goldelec_screenAdsModel.Store.IzmjeniObjekat" />
+          <FunctionImportMapping FunctionImportName="IzmjeniReklamu" FunctionName="goldelec_screenAdsModel.Store.IzmjeniReklamu" />
+          <FunctionImportMapping FunctionImportName="IzmjeniTeleviziju" FunctionName="goldelec_screenAdsModel.Store.IzmjeniTeleviziju" />
+          <FunctionImportMapping FunctionImportName="KlijentByID" FunctionName="goldelec_screenAdsModel.Store.KlijentByID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.KlijentByID_Result">
+                <ScalarProperty Name="KlijentID" ColumnName="KlijentID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="KontaktTelefon" ColumnName="KontaktTelefon" />
+                <ScalarProperty Name="KontaktOsoba" ColumnName="KontaktOsoba" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MarketingByReklama" FunctionName="goldelec_screenAdsModel.Store.MarketingByReklama">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.MarketingByReklama_Result">
+                <ScalarProperty Name="MarketingID" ColumnName="MarketingID" />
+                <ScalarProperty Name="DatumOd" ColumnName="DatumOd" />
+                <ScalarProperty Name="DatumDo" ColumnName="DatumDo" />
+                <ScalarProperty Name="Paket" ColumnName="Paket" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MarketingKlijentPrikaz" FunctionName="goldelec_screenAdsModel.Store.MarketingKlijentPrikaz">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.MarketingKlijentPrikaz_Result">
+                <ScalarProperty Name="MarketingID" ColumnName="MarketingID" />
+                <ScalarProperty Name="NazivPaketa" ColumnName="NazivPaketa" />
+                <ScalarProperty Name="NazivVidea" ColumnName="NazivVidea" />
+                <ScalarProperty Name="NazivKlijenta" ColumnName="NazivKlijenta" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MarketingProvjera" FunctionName="goldelec_screenAdsModel.Store.MarketingProvjera">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.MarketingProvjera_Result">
+                <ScalarProperty Name="MarketingID" ColumnName="MarketingID" />
+                <ScalarProperty Name="PaketID" ColumnName="PaketID" />
+                <ScalarProperty Name="ReklamaID" ColumnName="ReklamaID" />
+                <ScalarProperty Name="DatumOd" ColumnName="DatumOd" />
+                <ScalarProperty Name="DatumDo" ColumnName="DatumDo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ObjekatByID" FunctionName="goldelec_screenAdsModel.Store.ObjekatByID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.ObjekatByID_Result">
+                <ScalarProperty Name="ObjekatID" ColumnName="ObjekatID" />
+                <ScalarProperty Name="NazivObjekta" ColumnName="NazivObjekta" />
+                <ScalarProperty Name="AdresaObjekta" ColumnName="AdresaObjekta" />
+                <ScalarProperty Name="TipObjekta" ColumnName="TipObjekta" />
+                <ScalarProperty Name="KontaktOsoba" ColumnName="KontaktOsoba" />
+                <ScalarProperty Name="KontaktTelefon" ColumnName="KontaktTelefon" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ObjekatByNaziv" FunctionName="goldelec_screenAdsModel.Store.ObjekatByNaziv">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.ObjekatByNaziv_Result">
+                <ScalarProperty Name="ObjekatID" ColumnName="ObjekatID" />
+                <ScalarProperty Name="NazivObjekta" ColumnName="NazivObjekta" />
+                <ScalarProperty Name="AdresaObjekta" ColumnName="AdresaObjekta" />
+                <ScalarProperty Name="TipObjekta" ColumnName="TipObjekta" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ObjektiSaTipovima" FunctionName="goldelec_screenAdsModel.Store.ObjektiSaTipovima">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.ObjektiSaTipovima_Result">
+                <ScalarProperty Name="ObjekatID" ColumnName="ObjekatID" />
+                <ScalarProperty Name="KontaktOsoba" ColumnName="KontaktOsoba" />
+                <ScalarProperty Name="KontaktTelefon" ColumnName="KontaktTelefon" />
+                <ScalarProperty Name="NazivObjekta" ColumnName="NazivObjekta" />
+                <ScalarProperty Name="AdresaObjekta" ColumnName="AdresaObjekta" />
+                <ScalarProperty Name="TipObjekta" ColumnName="TipObjekta" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ObrisiTvByObjekat" FunctionName="goldelec_screenAdsModel.Store.ObrisiTvByObjekat" />
+          <FunctionImportMapping FunctionImportName="ObrišiTvFromPaketiTelevizije" FunctionName="goldelec_screenAdsModel.Store.ObrišiTvFromPaketiTelevizije" />
+          <FunctionImportMapping FunctionImportName="PaketByName" FunctionName="goldelec_screenAdsModel.Store.PaketByName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.PaketByName_Result">
+                <ScalarProperty Name="PaketID" ColumnName="PaketID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PaketInfo" FunctionName="goldelec_screenAdsModel.Store.PaketInfo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.PaketInfo_Result">
+                <ScalarProperty Name="NazivTelevizije" ColumnName="NazivTelevizije" />
+                <ScalarProperty Name="NazivGrada" ColumnName="NazivGrada" />
+                <ScalarProperty Name="NazivObjekta" ColumnName="NazivObjekta" />
+                <ScalarProperty Name="AdresaObjekta" ColumnName="AdresaObjekta" />
+                <ScalarProperty Name="TipObjektaNaziv" ColumnName="TipObjektaNaziv" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PaketiTelevizijeByPaketIDTelevizijaID" FunctionName="goldelec_screenAdsModel.Store.PaketiTelevizijeByPaketIDTelevizijaID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.PaketiTelevizijeByPaketIDTelevizijaID_Result">
+                <ScalarProperty Name="PaketiTelevizijeID" ColumnName="PaketiTelevizijeID" />
+                <ScalarProperty Name="PaketID" ColumnName="PaketID" />
+                <ScalarProperty Name="TelevizijaID" ColumnName="TelevizijaID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PaketiTerminiProvjera" FunctionName="goldelec_screenAdsModel.Store.PaketiTerminiProvjera">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.PaketiTerminiProvjera_Result">
+                <ScalarProperty Name="PaketiTerminiID" ColumnName="PaketiTerminiID" />
+                <ScalarProperty Name="PaketID" ColumnName="PaketID" />
+                <ScalarProperty Name="Termin" ColumnName="Termin" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProvjeraSlobodnihDana" FunctionName="goldelec_screenAdsModel.Store.ProvjeraSlobodnihDana">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.ProvjeraSlobodnihDana_Result">
+                <ScalarProperty Name="MarketingID" ColumnName="MarketingID" />
+                <ScalarProperty Name="PaketID" ColumnName="PaketID" />
+                <ScalarProperty Name="NazivReklame" ColumnName="NazivReklame" />
+                <ScalarProperty Name="DuzinaReklame" ColumnName="DuzinaReklame" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReklamaByID" FunctionName="goldelec_screenAdsModel.Store.ReklamaByID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.ReklamaByID_Result">
+                <ScalarProperty Name="ReklamaID" ColumnName="ReklamaID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Video" ColumnName="Video" />
+                <ScalarProperty Name="Klijent" ColumnName="Klijent" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReklamaByNaziv" FunctionName="goldelec_screenAdsModel.Store.ReklamaByNaziv">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.ReklamaByNaziv_Result">
+                <ScalarProperty Name="ReklamaID" ColumnName="ReklamaID" />
+                <ScalarProperty Name="Video" ColumnName="Video" />
+                <ScalarProperty Name="KlijentID" ColumnName="KlijentID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="DuzinaReklame" ColumnName="DuzinaReklame" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReklameByKlijent" FunctionName="goldelec_screenAdsModel.Store.ReklameByKlijent">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.ReklameByKlijent_Result">
+                <ScalarProperty Name="ReklamaID" ColumnName="ReklamaID" />
+                <ScalarProperty Name="Video" ColumnName="Video" />
+                <ScalarProperty Name="KlijentID" ColumnName="KlijentID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="DuzinaReklame" ColumnName="DuzinaReklame" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SveReklame" FunctionName="goldelec_screenAdsModel.Store.SveReklame">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.SveReklame_Result">
+                <ScalarProperty Name="ReklamaID" ColumnName="ReklamaID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Video" ColumnName="Video" />
+                <ScalarProperty Name="DuzinaReklame" ColumnName="DuzinaReklame" />
+                <ScalarProperty Name="Klijent" ColumnName="Klijent" />
+                <ScalarProperty Name="KontaktTelefon" ColumnName="KontaktTelefon" />
+                <ScalarProperty Name="KontaktOsoba" ColumnName="KontaktOsoba" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SveTelevizije" FunctionName="goldelec_screenAdsModel.Store.SveTelevizije">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.SveTelevizije_Result">
+                <ScalarProperty Name="TelevizijaID" ColumnName="TelevizijaID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="GradID" ColumnName="GradID" />
+                <ScalarProperty Name="ObjekatId" ColumnName="ObjekatId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SviGradovi" FunctionName="goldelec_screenAdsModel.Store.SviGradovi">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.SviGradovi_Result">
+                <ScalarProperty Name="GradID" ColumnName="GradID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SviKlijenti" FunctionName="goldelec_screenAdsModel.Store.SviKlijenti">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.SviKlijenti_Result">
+                <ScalarProperty Name="KlijentID" ColumnName="KlijentID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="KontaktTelefon" ColumnName="KontaktTelefon" />
+                <ScalarProperty Name="KontaktOsoba" ColumnName="KontaktOsoba" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SviObjekti" FunctionName="goldelec_screenAdsModel.Store.SviObjekti">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.SviObjekti_Result">
+                <ScalarProperty Name="ObjekatID" ColumnName="ObjekatID" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="TipId" ColumnName="TipId" />
+                <ScalarProperty Name="KontaktTelefon" ColumnName="KontaktTelefon" />
+                <ScalarProperty Name="KontaktOsoba" ColumnName="KontaktOsoba" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SviPaketi" FunctionName="goldelec_screenAdsModel.Store.SviPaketi">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.SviPaketi_Result">
+                <ScalarProperty Name="PaketID" ColumnName="PaketID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SviTipoviObjekta" FunctionName="goldelec_screenAdsModel.Store.SviTipoviObjekta">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.SviTipoviObjekta_Result">
+                <ScalarProperty Name="TipObjektaID" ColumnName="TipObjektaID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TelevizijaByID" FunctionName="goldelec_screenAdsModel.Store.TelevizijaByID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.TelevizijaByID_Result">
+                <ScalarProperty Name="TelevizijaID" ColumnName="TelevizijaID" />
+                <ScalarProperty Name="NazivTelevizije" ColumnName="NazivTelevizije" />
+                <ScalarProperty Name="NazivGrada" ColumnName="NazivGrada" />
+                <ScalarProperty Name="NazivObjekta" ColumnName="NazivObjekta" />
+                <ScalarProperty Name="AdresaObjekta" ColumnName="AdresaObjekta" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TelevizijaByName" FunctionName="goldelec_screenAdsModel.Store.TelevizijaByName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.TelevizijaByName_Result">
+                <ScalarProperty Name="TelevizijaID" ColumnName="TelevizijaID" />
+                <ScalarProperty Name="NazivTelevizije" ColumnName="NazivTelevizije" />
+                <ScalarProperty Name="NazivGrada" ColumnName="NazivGrada" />
+                <ScalarProperty Name="NazivObjekta" ColumnName="NazivObjekta" />
+                <ScalarProperty Name="AdresaObjekta" ColumnName="AdresaObjekta" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TelevizijeByPaket" FunctionName="goldelec_screenAdsModel.Store.TelevizijeByPaket">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.TelevizijeByPaket_Result">
+                <ScalarProperty Name="PaketiTelevizijeID" ColumnName="PaketiTelevizijeID" />
+                <ScalarProperty Name="NazivTelevizije" ColumnName="NazivTelevizije" />
+                <ScalarProperty Name="NazivGrada" ColumnName="NazivGrada" />
+                <ScalarProperty Name="NazivObjekta" ColumnName="NazivObjekta" />
+                <ScalarProperty Name="AdresaObjekta" ColumnName="AdresaObjekta" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TelevizijeInfo" FunctionName="goldelec_screenAdsModel.Store.TelevizijeInfo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.TelevizijeInfo_Result">
+                <ScalarProperty Name="TelevizijaID" ColumnName="TelevizijaID" />
+                <ScalarProperty Name="NazivTelevizije" ColumnName="NazivTelevizije" />
+                <ScalarProperty Name="NazivGrada" ColumnName="NazivGrada" />
+                <ScalarProperty Name="NazivObjekta" ColumnName="NazivObjekta" />
+                <ScalarProperty Name="AdresaObjekta" ColumnName="AdresaObjekta" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TerminiByPaket" FunctionName="goldelec_screenAdsModel.Store.TerminiByPaket">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.TerminiByPaket_Result">
+                <ScalarProperty Name="PaketiTerminiID" ColumnName="PaketiTerminiID" />
+                <ScalarProperty Name="PaketID" ColumnName="PaketID" />
+                <ScalarProperty Name="Termin" ColumnName="Termin" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TipOBjektaByName" FunctionName="goldelec_screenAdsModel.Store.TipOBjektaByName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.TipOBjektaByName_Result">
+                <ScalarProperty Name="TipObjektaID" ColumnName="TipObjektaID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="CheckUpdateAndroid">
+            <EntityTypeMapping TypeName="goldelec_screenAdsModel.CheckUpdateAndroid">
+              <MappingFragment StoreEntitySet="CheckUpdateAndroid">
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UpdateAndroidDodaj" FunctionName="goldelec_screenAdsModel.Store.UpdateAndroidDodaj" />
+          <FunctionImportMapping FunctionImportName="UPDATEANDROIDTRENUTNISTATUS" FunctionName="goldelec_screenAdsModel.Store.UPDATEANDROIDTRENUTNISTATUS">
+          </FunctionImportMapping>
+          <EntitySetMapping Name="errorAndroid">
+            <EntityTypeMapping TypeName="goldelec_screenAdsModel.errorAndroid">
+              <MappingFragment StoreEntitySet="errorAndroid">
+                <ScalarProperty Name="TipErrora" ColumnName="TipErrora" />
+                <ScalarProperty Name="Vrijeme" ColumnName="Vrijeme" />
+                <ScalarProperty Name="nazivTV" ColumnName="nazivTV" />
+                <ScalarProperty Name="ErrorID" ColumnName="ErrorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DeleteError" FunctionName="goldelec_screenAdsModel.Store.DeleteError" />
+          <FunctionImportMapping FunctionImportName="InsertError" FunctionName="goldelec_screenAdsModel.Store.InsertError" />
+          <FunctionImportMapping FunctionImportName="SelectError" FunctionName="goldelec_screenAdsModel.Store.SelectError">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.SelectError_Result">
+                <ScalarProperty Name="ErrorID" ColumnName="ErrorID" />
+                <ScalarProperty Name="nazivTV" ColumnName="nazivTV" />
+                <ScalarProperty Name="Vrijeme" ColumnName="Vrijeme" />
+                <ScalarProperty Name="TipErrora" ColumnName="TipErrora" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateError" FunctionName="goldelec_screenAdsModel.Store.UpdateError" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.UpdateError_Result">
+                <ScalarProperty Name="Vrijeme" ColumnName="Vrijeme" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectErrorUpdateProvjera" FunctionName="goldelec_screenAdsModel.Store.SelectErrorUpdateProvjera">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="goldelec_screenAdsModel.SelectErrorUpdateProvjera_Result">
+                <ScalarProperty Name="ErrorID" ColumnName="ErrorID" />
+                <ScalarProperty Name="nazivTV" ColumnName="nazivTV" />
+                <ScalarProperty Name="Vrijeme" ColumnName="Vrijeme" />
+                <ScalarProperty Name="TipErrora" ColumnName="TipErrora" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

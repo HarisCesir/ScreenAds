@@ -1,0 +1,511 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="goldelec_screenAdsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Gradovi">
+    <Key>
+      <PropertyRef Name="GradID" />
+    </Key>
+    <Property Name="GradID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Klijenti">
+    <Key>
+      <PropertyRef Name="KlijentID" />
+    </Key>
+    <Property Name="KlijentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="KontaktTelefon" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="KontaktOsoba" Type="nvarchar" MaxLength="500" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Marketing">
+    <Key>
+      <PropertyRef Name="MarketingID" />
+    </Key>
+    <Property Name="MarketingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PaketID" Type="int" Nullable="false" />
+    <Property Name="ReklamaID" Type="int" Nullable="false" />
+    <Property Name="DatumOd" Type="date" Nullable="false" />
+    <Property Name="DatumDo" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Objekti">
+    <Key>
+      <PropertyRef Name="ObjekatID" />
+    </Key>
+    <Property Name="ObjekatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Adresa" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="TipId" Type="int" Nullable="false" />
+    <Property Name="KontaktTelefon" Type="nvarchar" MaxLength="500" />
+    <Property Name="KontaktOsoba" Type="nvarchar" MaxLength="500" />
+    <Property Name="KorisnikID" Type="int" />
+  </EntityType>
+  <EntityType Name="Paketi">
+    <Key>
+      <PropertyRef Name="PaketID" />
+    </Key>
+    <Property Name="PaketID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PaketiTelevizije">
+    <Key>
+      <PropertyRef Name="PaketiTelevizijeID" />
+    </Key>
+    <Property Name="PaketiTelevizijeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PaketID" Type="int" Nullable="false" />
+    <Property Name="TelevizijaID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PaketiTermini">
+    <Key>
+      <PropertyRef Name="PaketiTerminiID" />
+    </Key>
+    <Property Name="PaketiTerminiID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PaketID" Type="int" Nullable="false" />
+    <Property Name="Termin" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reklama">
+    <Key>
+      <PropertyRef Name="ReklamaID" />
+    </Key>
+    <Property Name="ReklamaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Video" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="KlijentID" Type="int" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DuzinaReklame" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Televizije">
+    <Key>
+      <PropertyRef Name="TelevizijaID" />
+    </Key>
+    <Property Name="TelevizijaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="GradID" Type="int" Nullable="false" />
+    <Property Name="ObjekatId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipObjekta">
+    <Key>
+      <PropertyRef Name="TipObjektaID" />
+    </Key>
+    <Property Name="TipObjektaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar" MaxLength="500" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CheckUpdateAndroid">
+    <Key>
+      <PropertyRef Name="UpdateID" />
+    </Key>
+    <Property Name="UpdateID" Type="int" Nullable="false" />
+    <Property Name="Number" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Korisnici">
+    <Key>
+      <PropertyRef Name="KorisnikID" />
+    </Key>
+    <Property Name="KorisnikID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KorisnickoIme" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="LozinkaHash" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LozinkaSalt" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Uloga" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Objekti__Korisni__0C85DE4D">
+    <End Role="Korisnici" Type="Self.Korisnici" Multiplicity="0..1" />
+    <End Role="Objekti" Type="Self.Objekti" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Korisnici">
+        <PropertyRef Name="KorisnikID" />
+      </Principal>
+      <Dependent Role="Objekti">
+        <PropertyRef Name="KorisnikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Marketing_Paketi">
+    <End Role="Paketi" Type="Self.Paketi" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Marketing" Type="Self.Marketing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paketi">
+        <PropertyRef Name="PaketID" />
+      </Principal>
+      <Dependent Role="Marketing">
+        <PropertyRef Name="PaketID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Marketing_Reklama">
+    <End Role="Reklama" Type="Self.Reklama" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Marketing" Type="Self.Marketing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reklama">
+        <PropertyRef Name="ReklamaID" />
+      </Principal>
+      <Dependent Role="Marketing">
+        <PropertyRef Name="ReklamaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Objekti_TipObjekta">
+    <End Role="TipObjekta" Type="Self.TipObjekta" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Objekti" Type="Self.Objekti" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipObjekta">
+        <PropertyRef Name="TipObjektaID" />
+      </Principal>
+      <Dependent Role="Objekti">
+        <PropertyRef Name="TipId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PaketiTelevizije_Paketi">
+    <End Role="Paketi" Type="Self.Paketi" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PaketiTelevizije" Type="Self.PaketiTelevizije" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paketi">
+        <PropertyRef Name="PaketID" />
+      </Principal>
+      <Dependent Role="PaketiTelevizije">
+        <PropertyRef Name="PaketID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PaketiTelevizije_Televizije">
+    <End Role="Televizije" Type="Self.Televizije" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PaketiTelevizije" Type="Self.PaketiTelevizije" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Televizije">
+        <PropertyRef Name="TelevizijaID" />
+      </Principal>
+      <Dependent Role="PaketiTelevizije">
+        <PropertyRef Name="TelevizijaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PaketiTermini_Paketi">
+    <End Role="Paketi" Type="Self.Paketi" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PaketiTermini" Type="Self.PaketiTermini" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paketi">
+        <PropertyRef Name="PaketID" />
+      </Principal>
+      <Dependent Role="PaketiTermini">
+        <PropertyRef Name="PaketID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reklama_Klijenti">
+    <End Role="Klijenti" Type="Self.Klijenti" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Reklama" Type="Self.Reklama" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Klijenti">
+        <PropertyRef Name="KlijentID" />
+      </Principal>
+      <Dependent Role="Reklama">
+        <PropertyRef Name="KlijentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Televizije_Gradovi">
+    <End Role="Gradovi" Type="Self.Gradovi" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Televizije" Type="Self.Televizije" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gradovi">
+        <PropertyRef Name="GradID" />
+      </Principal>
+      <Dependent Role="Televizije">
+        <PropertyRef Name="GradID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Televizije_Objekti">
+    <End Role="Objekti" Type="Self.Objekti" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Televizije" Type="Self.Televizije" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Objekti">
+        <PropertyRef Name="ObjekatID" />
+      </Principal>
+      <Dependent Role="Televizije">
+        <PropertyRef Name="ObjekatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="BrisiGrad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="GradID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="BrisiKlijent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="KlijentID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="BrisiMarketing" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MarketingID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="BrisiObjekat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ObjekatID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="BrisiPaket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PaketID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="BrisiPaketFromPaketiTelevizije" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PaketID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="BrisiPaketiTermini" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PaketID" Type="int" Mode="In" />
+    <Parameter Name="Termin" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="BrisiPaketTelevizija" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PaketTelevizijaID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="BrisiReklamu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ReklamaID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="BrisiTeleviziju" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TelevizijaID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="BrisiTipObjekta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TipID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DodajDane" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MarketingID" Type="int" Mode="In" />
+    <Parameter Name="Dan" Type="date" Mode="In" />
+  </Function>
+  <Function Name="DodajGrad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="DodajKlijent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+    <Parameter Name="KontaktTelefon" Type="nvarchar" Mode="In" />
+    <Parameter Name="KontaktOsoba" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="DodajMarketing" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PaketID" Type="int" Mode="In" />
+    <Parameter Name="ReklamaID" Type="int" Mode="In" />
+    <Parameter Name="DatumOD" Type="date" Mode="In" />
+    <Parameter Name="DatumDO" Type="date" Mode="In" />
+  </Function>
+  <Function Name="DodajObjekat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Adresa" Type="nvarchar" Mode="In" />
+    <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+    <Parameter Name="TipObjektaID" Type="int" Mode="In" />
+    <Parameter Name="KontaktTelefon" Type="nvarchar" Mode="In" />
+    <Parameter Name="KontaktOsoba" Type="nvarchar" Mode="In" />
+    <Parameter Name="KorisnikID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DodajPaket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="DodajPaketiTelevizije" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PaketID" Type="int" Mode="In" />
+    <Parameter Name="TelevizijaID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DodajPaketiTermini" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PaketID" Type="int" Mode="In" />
+    <Parameter Name="Termin" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="DodajReklamu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Naziv" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Video" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="KlijentID" Type="int" Mode="In" />
+    <Parameter Name="Duzina" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DodajTeleviziju" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+    <Parameter Name="GradID" Type="int" Mode="In" />
+    <Parameter Name="ObjekatID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DodajTipObjekta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Info" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TvID" Type="int" Mode="In" />
+    <Parameter Name="Datum" Type="date" Mode="In" />
+  </Function>
+  <Function Name="IzmjeniObjekat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Adresa" Type="nvarchar" Mode="In" />
+    <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+    <Parameter Name="TipObjektaID" Type="int" Mode="In" />
+    <Parameter Name="ObjekatID" Type="int" Mode="In" />
+    <Parameter Name="KontaktTelefon" Type="nvarchar" Mode="In" />
+    <Parameter Name="KontaktOsoba" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="IzmjeniReklamu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ReklamaID" Type="int" Mode="In" />
+    <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+    <Parameter Name="KlijentID" Type="int" Mode="In" />
+    <Parameter Name="Video" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="IzmjeniTeleviziju" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TelevizijaID" Type="int" Mode="In" />
+    <Parameter Name="GradID" Type="int" Mode="In" />
+    <Parameter Name="ObjekatID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="KlijentByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="KlijentID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="MarketingByReklama" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ReklamaID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="MarketingKlijentPrikaz" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="KlijentID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="MarketingProvjera" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="paketID" Type="int" Mode="In" />
+    <Parameter Name="reklamaID" Type="int" Mode="In" />
+    <Parameter Name="DatumOD" Type="date" Mode="In" />
+    <Parameter Name="DatumDO" Type="date" Mode="In" />
+  </Function>
+  <Function Name="ObjekatByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ObjekatID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ObjekatByNaziv" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ObjekatNaziv" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ObjektiSaTipovima" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ObrisiTvByObjekat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ObjekatID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ObrišiTvFromPaketiTelevizije" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TelevizijaID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="PaketByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="PaketInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PaketID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="PaketiTelevizijeByPaketIDTelevizijaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PaketID" Type="int" Mode="In" />
+    <Parameter Name="TelevizijaID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="PaketiTerminiProvjera" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PaketID" Type="int" Mode="In" />
+    <Parameter Name="Termin" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ProvjeraSlobodnihDana" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PaketID" Type="int" Mode="In" />
+    <Parameter Name="Dan" Type="date" Mode="In" />
+  </Function>
+  <Function Name="ReklamaByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ReklamaID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ReklamaByNaziv" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ReklameByKlijent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="KlijentID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SveReklame" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SveTelevizije" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SviGradovi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SviKlijenti" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SviObjekti" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SviPaketi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SviTipoviObjekta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="TelevizijaByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TelevizijaID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="TelevizijaByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NazivTV" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="TelevizijeByPaket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="paketID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="TelevizijeInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="TerminiByPaket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="paketID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="TipOBjektaByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TipOBjekta" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="DeleteError" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="goldelec_goldelec">
+    <Parameter Name="errorID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DodajKorisnika" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="goldelec_goldelec">
+    <Parameter Name="KorisnickoIme" Type="nvarchar" Mode="In" />
+    <Parameter Name="LozinkaHash" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="LozinkaSalt" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Uloga" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="InsertError" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="goldelec_goldelec">
+    <Parameter Name="NazivTV" Type="nvarchar" Mode="In" />
+    <Parameter Name="Vrijeme" Type="datetime" Mode="In" />
+    <Parameter Name="TipErrora" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="MarketingPoDatumu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="goldelec_goldelec">
+    <Parameter Name="Datum" Type="date" Mode="In" />
+  </Function>
+  <Function Name="ReklameByPaketIDatum" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="goldelec_goldelec">
+    <Parameter Name="PaketID" Type="int" Mode="In" />
+    <Parameter Name="Datum" Type="date" Mode="In" />
+  </Function>
+  <Function Name="SelectError" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="goldelec_goldelec" />
+  <Function Name="UpdateAndroidDodaj" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="goldelec_goldelec">
+    <Parameter Name="Number" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UPDATEANDROIDTRENUTNISTATUS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="goldelec_goldelec" />
+  <EntityContainer Name="goldelec_screenAdsModelStoreContainer">
+    <EntitySet Name="Gradovi" EntityType="Self.Gradovi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Klijenti" EntityType="Self.Klijenti" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Marketing" EntityType="Self.Marketing" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Objekti" EntityType="Self.Objekti" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Paketi" EntityType="Self.Paketi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PaketiTelevizije" EntityType="Self.PaketiTelevizije" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PaketiTermini" EntityType="Self.PaketiTermini" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reklama" EntityType="Self.Reklama" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Televizije" EntityType="Self.Televizije" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipObjekta" EntityType="Self.TipObjekta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CheckUpdateAndroid" EntityType="Self.CheckUpdateAndroid" Schema="goldelec_goldelec" store:Type="Tables" />
+    <EntitySet Name="Korisnici" EntityType="Self.Korisnici" Schema="goldelec_goldelec" store:Type="Tables" />
+    <AssociationSet Name="FK__Objekti__Korisni__0C85DE4D" Association="Self.FK__Objekti__Korisni__0C85DE4D">
+      <End Role="Korisnici" EntitySet="Korisnici" />
+      <End Role="Objekti" EntitySet="Objekti" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Marketing_Paketi" Association="Self.FK_Marketing_Paketi">
+      <End Role="Paketi" EntitySet="Paketi" />
+      <End Role="Marketing" EntitySet="Marketing" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Marketing_Reklama" Association="Self.FK_Marketing_Reklama">
+      <End Role="Reklama" EntitySet="Reklama" />
+      <End Role="Marketing" EntitySet="Marketing" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Objekti_TipObjekta" Association="Self.FK_Objekti_TipObjekta">
+      <End Role="TipObjekta" EntitySet="TipObjekta" />
+      <End Role="Objekti" EntitySet="Objekti" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PaketiTelevizije_Paketi" Association="Self.FK_PaketiTelevizije_Paketi">
+      <End Role="Paketi" EntitySet="Paketi" />
+      <End Role="PaketiTelevizije" EntitySet="PaketiTelevizije" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PaketiTelevizije_Televizije" Association="Self.FK_PaketiTelevizije_Televizije">
+      <End Role="Televizije" EntitySet="Televizije" />
+      <End Role="PaketiTelevizije" EntitySet="PaketiTelevizije" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PaketiTermini_Paketi" Association="Self.FK_PaketiTermini_Paketi">
+      <End Role="Paketi" EntitySet="Paketi" />
+      <End Role="PaketiTermini" EntitySet="PaketiTermini" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reklama_Klijenti" Association="Self.FK_Reklama_Klijenti">
+      <End Role="Klijenti" EntitySet="Klijenti" />
+      <End Role="Reklama" EntitySet="Reklama" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Televizije_Gradovi" Association="Self.FK_Televizije_Gradovi">
+      <End Role="Gradovi" EntitySet="Gradovi" />
+      <End Role="Televizije" EntitySet="Televizije" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Televizije_Objekti" Association="Self.FK_Televizije_Objekti">
+      <End Role="Objekti" EntitySet="Objekti" />
+      <End Role="Televizije" EntitySet="Televizije" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

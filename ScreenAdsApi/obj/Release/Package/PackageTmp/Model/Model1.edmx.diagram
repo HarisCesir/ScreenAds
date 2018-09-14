@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="70e25b645e1b411ca9b7ba2f75d975df" Name="Diagram1">
+        <EntityTypeShape EntityType="goldelec_screenAdsModel.Gradovi" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="goldelec_screenAdsModel.Klijenti" Width="1.5" PointX="7.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="goldelec_screenAdsModel.Marketing" Width="1.5" PointX="12.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="goldelec_screenAdsModel.Objekti" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="goldelec_screenAdsModel.Paketi" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="goldelec_screenAdsModel.PaketiTelevizije" Width="1.5" PointX="7.5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="goldelec_screenAdsModel.PaketiTermini" Width="1.5" PointX="7.5" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="goldelec_screenAdsModel.Reklama" Width="1.5" PointX="10" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="goldelec_screenAdsModel.Televizije" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="goldelec_screenAdsModel.TipObjekta" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="goldelec_screenAdsModel.FK_Televizije_Gradovi" ManuallyRouted="false" />
+        <AssociationConnector Association="goldelec_screenAdsModel.FK_Reklama_Klijenti" ManuallyRouted="false" />
+        <AssociationConnector Association="goldelec_screenAdsModel.FK_Marketing_Paketi" ManuallyRouted="false" />
+        <AssociationConnector Association="goldelec_screenAdsModel.FK_Marketing_Reklama" ManuallyRouted="false" />
+        <AssociationConnector Association="goldelec_screenAdsModel.FK_Objekti_TipObjekta" ManuallyRouted="false" />
+        <AssociationConnector Association="goldelec_screenAdsModel.FK_Televizije_Objekti" ManuallyRouted="false" />
+        <AssociationConnector Association="goldelec_screenAdsModel.FK_PaketiTelevizije_Paketi" ManuallyRouted="false" />
+        <AssociationConnector Association="goldelec_screenAdsModel.FK_PaketiTermini_Paketi" ManuallyRouted="false" />
+        <AssociationConnector Association="goldelec_screenAdsModel.FK_PaketiTelevizije_Televizije" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="goldelec_screenAdsModel.CheckUpdateAndroid" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="goldelec_screenAdsModel.errorAndroid" Width="1.5" PointX="3.375" PointY="8.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
